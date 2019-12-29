@@ -16,9 +16,9 @@ public class Activity {
     @JoinColumn(name = "groupe_id")
     private Groupe groupe;
 
-    @OneToMany(mappedBy="activity",
-            targetEntity=Session.class,
-            fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "activity",
+            targetEntity = Session.class,
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Session> sessions;
 
     public Activity(String activityName, Groupe groupe, List<Session> sessions) {

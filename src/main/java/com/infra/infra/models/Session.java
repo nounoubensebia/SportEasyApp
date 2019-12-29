@@ -8,7 +8,7 @@ import java.util.List;
 public class Session {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private Time startTime;
@@ -19,9 +19,9 @@ public class Session {
     @JoinColumn(name = "activity_id")
     private Activity activity;
 
-    @OneToMany(mappedBy="session",
-            targetEntity=Inscription.class,
-            fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "session",
+            targetEntity = Inscription.class,
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Inscription> inscriptions;
 
     public Session(Time startTime, String day, int capacity, Activity activity, List<Inscription> inscriptions) {

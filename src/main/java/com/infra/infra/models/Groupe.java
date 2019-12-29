@@ -7,14 +7,14 @@ import java.util.List;
 public class Groupe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String groupName;
 
-    @OneToMany(mappedBy="groupe",
-            targetEntity=Activity.class,
-            fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "groupe",
+            targetEntity = Activity.class,
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Activity> activities;
 
     public Groupe(String groupName, List<Activity> activities) {

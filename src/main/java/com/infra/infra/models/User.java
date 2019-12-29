@@ -8,7 +8,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String firstName;
@@ -18,9 +18,9 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy="user",
-            targetEntity=Inscription.class,
-            fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",
+            targetEntity = Inscription.class,
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Inscription> inscriptions;
 
     public User(String firstName, String lastName, Date birthDate, int gender, String email, String password, List<Inscription> inscriptions) {

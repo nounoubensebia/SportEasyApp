@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class Inscription {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
