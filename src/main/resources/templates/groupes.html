@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:if="${not #lists.isEmpty(groupes)}">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+            </tr>
+            <tr th:each="groupe: ${groupes}">
+                <td th:text="${groupe.id}"></td>
+                <td th:text="${groupe.groupName}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
