@@ -1,12 +1,11 @@
 package com.infra.infra.contollers;
 
 import com.infra.infra.models.Groupe;
-import com.infra.infra.services.GroupeRepository;
+import com.infra.infra.services.groupe.GroupeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -18,6 +17,8 @@ public class GroupeControllerHtml {
     public void setGroupeRepository(GroupeRepository groupeRepository) {
         this.groupeRepository = groupeRepository;
     }
+
+
 
     //Requestmapping pour définir la route
     @RequestMapping("/groupshtml")
