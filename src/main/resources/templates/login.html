@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/style-login-inscription.css">
 </head>
 <body>
+    <h1> Login</h1>
+    <form id="loginForm" onsubmit="return false;"> <!--action="/action_page.php"-->
+        <div>
+            <label for="uname"><b>Nom d'utilisateur</b></label>
+            <input type="text" placeholder="Entrez votre nom d'utilisateur" name="uname" id="uname" required>
+            <label for="psw"><b>Mot de passe</b></label>
+            <input type="password" placeholder="Entrez votre mot de passe" name="psw" id="psw" required>
+            <button onclick="">Login</button>
+        </div>
 
+        <span style="margin-left:10px; color:red;" id='wrong'></span><br/><br/>
+        <span style="margin-left:15px;"><a href="#">Je n'ai pas de compte</a></span><br/><br/>
+        <span style="margin-left:15px;"><a href="#">Mot de passe oublié</a></span>
+    </form>
 </body>
 </html>
