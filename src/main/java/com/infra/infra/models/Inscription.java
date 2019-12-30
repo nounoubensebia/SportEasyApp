@@ -1,8 +1,16 @@
 package com.infra.infra.models;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.Predicate;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.ChronoLocalDateTime;
+import java.time.temporal.TemporalAccessor;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Inscription {
@@ -23,11 +31,14 @@ public class Inscription {
 
     private LocalDateTime inscriptionDate;
 
-    public Inscription(User user, Session session, boolean titular, LocalDateTime inscriptionDate) {
+    private LocalDateTime desincriptionDate;
+
+    public Inscription(User user, Session session, boolean titular, LocalDateTime inscriptionDate, LocalDateTime desincriptionDate) {
         this.user = user;
         this.session = session;
         this.titular = titular;
         this.inscriptionDate = inscriptionDate;
+        this.desincriptionDate = desincriptionDate;
     }
 
     public Inscription() {
@@ -67,5 +78,47 @@ public class Inscription {
 
     public void setInscriptionDate(LocalDateTime inscriptionDate) {
         this.inscriptionDate = inscriptionDate;
+    }
+
+    public LocalDateTime getDesincriptionDate() {
+        return desincriptionDate;
+    }
+
+    public void setDesincriptionDate(LocalDateTime desincriptionDate) {
+        this.desincriptionDate = desincriptionDate;
+    }
+
+    // check if inscription is currently active ie if optional not expired and if titular not unregistered
+    public boolean isActive()
+    {
+        List<Inscription> inscriptions = new ArrayList<>(user.getInscriptions());
+        if (titular)
+        {
+            for (Inscription inscription:inscriptions)
+            {
+                if (inscription.getSession().getActivity().equals(this.getSession().getActivity())&&
+                !inscription.titular&&inscription.isOptionalActive())
+                {
+                    return false;
+                }
+                if (inscription.getDesincriptionDate()!=null&&
+                        inscription.getDesincriptionDate().isAfter(LocalDateTime.now()))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else
+        {
+            return isOptionalActive();
+        }
+
+    }
+
+    private boolean isOptionalActive()
+    {
+        LocalDateTime currentDate = LocalDateTime.now();
+        return currentDate.isBefore(inscriptionDate);
     }
 }

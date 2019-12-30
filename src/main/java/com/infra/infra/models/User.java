@@ -1,7 +1,12 @@
 package com.infra.infra.models;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.Predicate;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +22,16 @@ public class User {
     private int gender;
     private String email;
     private String password;
+
+    public static int REGISTERED_TO_ACTIVITY_AS_TITULAR_ONLY = 1;
+
+    public static int REGISTERED_TO_ACTIVITY_AS_OPTIONAL_ONLY = 2;
+
+    public static int REGISTERED_TO_ACTIVITY_AS_OPTIONAL_AND_TITULAR = 3;
+
+    public static int NOT_REGISTERED_TO_ACTIVITY_AT_ALL = 0;
+
+    public static int REGISTERED_TO_ACTIVITY_AS_TITULAR_BUT_NOT_FOR_NEXT_WEEK = -1;
 
     @OneToMany(mappedBy = "user",
             targetEntity = Inscription.class,
@@ -94,5 +109,77 @@ public class User {
 
     public void setInscriptions(List<Inscription> inscriptions) {
         this.inscriptions = inscriptions;
+    }
+
+    public int getRegistrationType(Activity activity)
+    {
+        ArrayList<Inscription> inscriptions = new ArrayList<>(this.getInscriptions());
+        CollectionUtils.filter(inscriptions, new Predicate<Inscription>() {
+            @Override
+            public boolean evaluate(Inscription inscription) {
+                return inscription.getSession().getActivity().equals(activity);
+            }
+        });
+        boolean titular = false;
+        boolean optional = false;
+        boolean notThisWeek = false;
+        for (Inscription inscription : inscriptions)
+        {
+            if (inscription.isTitular())
+            {
+                if ((inscription.getDesincriptionDate()==null||
+                        inscription.getDesincriptionDate().isBefore(LocalDateTime.now())))
+                {
+                    titular = true;
+                    break;
+                }
+                else
+                {
+                    titular =true;
+                    notThisWeek = true;
+                    break;
+                }
+            }
+            else
+            {
+                if (inscription.getInscriptionDate().isAfter(LocalDateTime.now()))
+                {
+                    optional = true;
+                }
+            }
+        }
+        if (titular&&optional)
+            return REGISTERED_TO_ACTIVITY_AS_OPTIONAL_AND_TITULAR;
+        if (optional)
+            return REGISTERED_TO_ACTIVITY_AS_OPTIONAL_ONLY;
+        if (titular&&!notThisWeek)
+            return REGISTERED_TO_ACTIVITY_AS_TITULAR_ONLY;
+        if (titular&&notThisWeek)
+            return REGISTERED_TO_ACTIVITY_AS_TITULAR_BUT_NOT_FOR_NEXT_WEEK;
+
+        return NOT_REGISTERED_TO_ACTIVITY_AT_ALL;
+    }
+
+    public int getNumberOfRegistrationsByGroup(Groupe groupe)
+    {
+        ArrayList<Inscription> activeInscriptions = new ArrayList<>(getInscriptions());
+        CollectionUtils.filter(activeInscriptions, new Predicate<Inscription>() {
+            @Override
+            public boolean evaluate(Inscription inscription) {
+                return inscription.isActive();
+            }
+        });
+
+        int s = 0;
+
+        for (Inscription inscription:activeInscriptions)
+        {
+            if (inscription.getSession().getActivity().getGroupe().getId()==groupe.getId())
+            {
+                s++;
+            }
+        }
+
+        return s;
     }
 }
