@@ -19,6 +19,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getConnectedUser() {
+        return userRepository.getOne(1L);
+    }
+
+    @Override
     public List<User> getAll() {
         return IterableUtils.toList(userRepository.findAll());
     }
