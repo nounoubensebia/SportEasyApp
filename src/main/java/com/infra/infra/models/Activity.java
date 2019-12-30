@@ -57,4 +57,13 @@ public class Activity {
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if((obj == null) || (obj.getClass() != this.getClass())) {
+            return false;
+        }
+        Activity other = (Activity)obj;
+        return other.id==this.id;
+    }
 }

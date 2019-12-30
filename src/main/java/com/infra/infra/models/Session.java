@@ -1,7 +1,11 @@
 package com.infra.infra.models;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -77,5 +81,27 @@ public class Session {
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public boolean atFullCapacity(boolean titular)
+    {
+        if (inscriptions.size()<capacity)
+            return false;
+        else
+        {
+            if (titular)
+            {
+                for (Inscription inscription:getInscriptions())
+                {
+                    if (inscription.isActive()&&!inscription.isTitular())
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else
+                return true;
+        }
     }
 }
