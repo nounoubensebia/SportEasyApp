@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+<html lang="en"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      >
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="styles/style-login-inscription.css">
 </head>
 <body>
-<form th:action="@{/first-inscription}" th:object="${User.personForm}" method="post">
+<form  method="post" action="/first-inscription">
 
     <h1> Inscription</h1>
     <label for="lname"><b>Nom</b></label>
-    <input type="text" placeholder="Entrez votre nom" id="lname" th:field="*{firstName}" required>
+    <input type="text" placeholder="Entrez votre nom" id="lname"  required>
 
     <label for="fname"><b>Prénom</b></label>
-    <input type="text" placeholder="Entrez votre prénom" id="fname" th:field="*{lastName}"required>
+    <input type="text" placeholder="Entrez votre prénom" id="fname" required>
 
     <label for="email"><b>Adresse mail</b></label>
-    <input type="text" placeholder="Adresse mail" id="email" required>
+    <input type="email" placeholder="Adresse mail" id="email" name="email" required>
 
     <label for="tel"><b>Téléphone</b></label>
     <input type="text" placeholder="Téléphone" id="tel" required>
