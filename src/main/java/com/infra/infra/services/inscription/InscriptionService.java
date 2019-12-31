@@ -26,4 +26,5 @@ public interface InscriptionService {
     public PossibleRegistration isRegistrationPossible(User user, Session session, boolean titular);
     public void deleteLastOptionalRegistration();
 
+
 }

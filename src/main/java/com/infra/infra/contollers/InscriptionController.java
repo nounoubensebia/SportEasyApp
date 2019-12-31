@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
-@RestController
+@Controller
 public class InscriptionController {
 
     private InscriptionService inscriptionService;
@@ -44,5 +44,6 @@ public class InscriptionController {
         return String.valueOf(inscriptionService.isRegistrationPossible(userService.getById(userId),
                 sessionService.getById(sessionId),titular));
     }
+
 
 }

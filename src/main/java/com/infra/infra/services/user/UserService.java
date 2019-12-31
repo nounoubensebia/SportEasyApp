@@ -12,5 +12,6 @@ public interface UserService {
     public void create(User user);
     public void update(User user);
     public void delete(User session);
+    public boolean checkEmail(String email);
 
 }

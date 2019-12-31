@@ -93,4 +93,5 @@ public class InscriptionServiceImpl implements InscriptionService {
     public void deleteLastOptionalRegistration() {
 
     }
+
 }
