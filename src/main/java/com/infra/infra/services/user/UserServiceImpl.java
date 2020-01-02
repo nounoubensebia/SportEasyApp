@@ -3,12 +3,15 @@ package com.infra.infra.services.user;
 import com.infra.infra.models.User;
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserRepository userRepository;
 
@@ -60,4 +63,14 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(s);
+        if (user == null) {
+            throw new UsernameNotFoundException("No user present with username : " + s);
+        }
+        else {
+            return user;
+        }
+    }
 }
