@@ -27,6 +27,7 @@ public class User implements UserDetails {
     private int gender;
     private String email;
     private String password;
+    private boolean isAdmin;
 
     public static int REGISTERED_TO_ACTIVITY_AS_TITULAR_ONLY = 1;
 
@@ -43,7 +44,8 @@ public class User implements UserDetails {
             fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Inscription> inscriptions;
 
-    public User(String firstName, String lastName, Date birthDate, int gender, String email, String password, List<Inscription> inscriptions) {
+    public User(String firstName, String lastName, Date birthDate, int gender, String email, String password,
+                List<Inscription> inscriptions,boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -51,6 +53,7 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.inscriptions = inscriptions;
+        this.isAdmin = isAdmin;
     }
 
     public User() {
@@ -78,6 +81,14 @@ public class User implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     @Override

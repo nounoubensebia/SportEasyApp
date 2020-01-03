@@ -20,7 +20,7 @@ public interface InscriptionService {
 
     public List<Inscription> getAll();
     public Inscription getById(long id);
-    public void create(Inscription inscription);
+    public Inscription create(Inscription inscription);
     public void update(Inscription inscription);
     public void delete(Inscription inscription);
     public PossibleRegistration isRegistrationPossible(User user, Session session, boolean titular);

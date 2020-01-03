@@ -35,8 +35,8 @@ public class InscriptionServiceImpl implements InscriptionService {
     }
 
     @Override
-    public void create(Inscription inscription) {
-        inscriptionRepository.save(inscription);
+    public Inscription create(Inscription inscription) {
+        return inscriptionRepository.save(inscription);
     }
 
     @Override

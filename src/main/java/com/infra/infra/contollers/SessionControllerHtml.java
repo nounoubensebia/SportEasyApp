@@ -17,6 +17,11 @@ import java.util.List;
 public class SessionControllerHtml {
     private SessionService sessionService;
 
+    @Autowired
+    public void setSessionService(SessionService sessionService) {
+        this.sessionService = sessionService;
+    }
+
     //Requestmapping pour définir la route
     @RequestMapping("/listeActivites")
     public String showSession(Model model)
@@ -26,8 +31,6 @@ public class SessionControllerHtml {
         //Il faut ajouter les données à afficher à l'HTML
         model.addAttribute("listeActivites",listeActivites);
 
-        UserServiceImpl userService = new UserServiceImpl();
-        User user = userService.getConnectedUser();
 
         // il faut retourner le nom du fichier HTML à afficher
         return "listeActivites";
