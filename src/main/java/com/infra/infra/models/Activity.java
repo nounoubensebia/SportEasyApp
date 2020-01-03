@@ -15,6 +15,7 @@ public class Activity {
     @ManyToOne
     @JoinColumn(name = "groupe_id")
     private Groupe groupe;
+    
 
     @OneToMany(mappedBy = "activity",
             targetEntity = Session.class,

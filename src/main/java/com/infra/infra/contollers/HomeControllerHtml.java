@@ -1,18 +1,16 @@
 package com.infra.infra.contollers;
 
 import com.infra.infra.models.Groupe;
-import com.infra.infra.services.groupe.GroupeRepository;
 import com.infra.infra.services.groupe.GroupeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class GroupeControllerHtml {
+public class HomeControllerHtml {
 
     private GroupeService groupeService;
 
@@ -24,7 +22,7 @@ public class GroupeControllerHtml {
 
 
     //Requestmapping pour définir la route
-    @RequestMapping("/groupshtml")
+    @RequestMapping("/home")
     public String showGroupes(Model model)
     {
 
@@ -36,7 +34,7 @@ public class GroupeControllerHtml {
         model.addAttribute("groupes",groupes);
 
         // il faut retourner le nom du fichier HTML à afficher
-        return "groupes";
+        return "home";
     }
 
 }

@@ -14,6 +14,7 @@
             <tr th:each="groupe: ${groupes}">
                 <td th:text="${groupe.id}"></td>
                 <td th:text="${groupe.groupName}"></td>
+                <td th:text="${groupe.getActivities().get(1).getActivityName()}"></td>
             </tr>
         </table>
     </div>
