@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(planningActivites)}">
+    <table>
+        <tr>
+            <th>activité</th>
+            <th>jour</th>
+            <th>heure de début</th>
+        </tr>
+        <tr th:each="inscriptions: ${planningActivites}">
+            <td th:text="${inscriptions.getSession().getActivity().getActivityName()}"></td>
+            <td th:text="${inscriptions.getSession().getDay()}"></td>
+            <td th:text="${inscriptions.getSession().getStartTime()}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
