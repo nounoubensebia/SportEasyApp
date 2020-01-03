@@ -4,6 +4,10 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -103,5 +107,30 @@ public class Session {
             else
                 return true;
         }
+    }
+
+    private DayOfWeek getDayOfWeek()
+    {
+        if (day.equals("Lundi"))
+            return DayOfWeek.MONDAY;
+        if (day.equals("Mardi"))
+            return DayOfWeek.THURSDAY;
+        if (day.equals("Jeudi"))
+            return DayOfWeek.TUESDAY;
+        if (day.equals("Mercredi"))
+            return DayOfWeek.WEDNESDAY;
+        if (day.equals("Vendredi"))
+            return DayOfWeek.FRIDAY;
+        if (day.equals("Dimanche"))
+            return DayOfWeek.SUNDAY;
+        if (day.equals("Samedi"))
+            return DayOfWeek.SATURDAY;
+        return DayOfWeek.SATURDAY;
+    }
+
+    public LocalDateTime getNextSessionDate()
+    {
+        LocalDateTime now = LocalDateTime.now();
+        return now.with(TemporalAdjusters.next(getDayOfWeek()));
     }
 }
