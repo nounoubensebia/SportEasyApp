@@ -11,7 +11,7 @@
 
     <label for="name"><b>Nom de l'Activité</b></label>
     <input type="text" placeholder="Entrez votre nom" id="name"  name="name" required>
-    <select name="groupeId" id="groupeId">
+    <select name="groupeId" id="groupeId" required hidden>
         <option th:text="${groupe.getId()}" th:value="${groupe.getId()}"></option>
     </select>
 

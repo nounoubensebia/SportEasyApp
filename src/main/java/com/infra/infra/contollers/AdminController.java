@@ -24,7 +24,7 @@ public class AdminController {
     @Autowired
     public void setGroupeService(GroupeService groupeService) {
         this.groupeService = groupeService; }
-
+    @Autowired
     public void setActivityService(ActivityService activityService) {
         this.activityService = activityService;
     }
@@ -39,10 +39,12 @@ public class AdminController {
     }
 
     @GetMapping ("/admin-home/{id}")
-    public String addActivity(@PathVariable int id, Model model){
+    public String addActivity(@PathVariable String id, Model model){
         Groupe groupe;
-        if (id==-1){
+        if (Integer.parseInt(id)==-1){
             groupe=new Groupe();
+            int indexname=groupeService.getAll().size();
+            groupe.setGroupName("grroupe "+indexname);
             groupeService.create(groupe);
             int tmp=groupeService.getAll().size();
             long index=groupeService.getAll().get(tmp-1).getId();
@@ -50,7 +52,7 @@ public class AdminController {
             groupe=groupeService.getById(index);
 
        }else {
-            groupe=groupeService.getById(id);
+            groupe=groupeService.getById(Integer.parseInt(id));
         }
 
         model.addAttribute("groupe",groupe);
@@ -58,10 +60,16 @@ public class AdminController {
     }
 
     @PostMapping("/addActivity")
-    public String addActivity(@RequestParam Long groupeId,@RequestParam String name,Model model){
+    public String addActivity(@RequestParam String groupeId,@RequestParam String name,Model model){
+        System.out.println(groupeId+"***********************************");
+        System.out.println(name+"***********************************");
         Activity activity=new Activity();
         activity.setActivityName(name);
-        activity.setGroupe(groupeService.getById(groupeId));
+
+        activity.setGroupe(groupeService.getById(Long.parseLong(groupeId)));
+        System.out.println(activity.getActivityName()+"*************************");
+        System.out.println(activity.getId()+"*************************");
+        System.out.println(activity.getGroupe().getGroupName()+"*************************");
         activityService.create(activity);
         return "adminHome";
     }
