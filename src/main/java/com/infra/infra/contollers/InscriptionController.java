@@ -97,9 +97,9 @@ public class InscriptionController {
 
     @RequestMapping("/planningActivites")
     public String showPlanning(Model model) {
-        long user_id = userService.getConnectedUser().getId();
-        List<Inscription> listeInscription = inscriptionService.getAll();
-        List<Inscription> planningActivites = new ArrayList<Inscription>();
+        User user = userService.getConnectedUser();
+
+        List<Inscription> planningActivites = new ArrayList<Inscription>(user.getInscriptions());
         /*for (int i = 0; i < listeInscription.size(); i++) {
             if (listeInscription.get(i).getUser().getId() == user_id) {
                 if (!listeInscription.get(i).isTitular()) {
@@ -117,7 +117,7 @@ public class InscriptionController {
         CollectionUtils.filter(planningActivites, new Predicate<Inscription>() {
             @Override
             public boolean evaluate(Inscription inscription) {
-                return !inscription.isActive();
+                return inscription.isActive();
             }
         });
 
