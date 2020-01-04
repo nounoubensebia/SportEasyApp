@@ -7,6 +7,8 @@ import com.infra.infra.services.inscription.InscriptionService;
 import com.infra.infra.services.inscription.InscriptionServiceImpl;
 import com.infra.infra.services.session.SessionService;
 import com.infra.infra.services.user.UserService;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -98,7 +100,7 @@ public class InscriptionController {
         long user_id = userService.getConnectedUser().getId();
         List<Inscription> listeInscription = inscriptionService.getAll();
         List<Inscription> planningActivites = new ArrayList<Inscription>();
-        for (int i = 0; i < listeInscription.size(); i++) {
+        /*for (int i = 0; i < listeInscription.size(); i++) {
             if (listeInscription.get(i).getUser().getId() == user_id) {
                 if (!listeInscription.get(i).isTitular()) {
                     if (listeInscription.get(i).getSession().getNextSessionDate(listeInscription.get(i).getInscriptionDate()).isAfter(LocalDateTime.now())) {
@@ -110,7 +112,14 @@ public class InscriptionController {
                     planningActivites.add(listeInscription.get(i));
                 }
             }
-        }
+        }*/
+
+        CollectionUtils.filter(planningActivites, new Predicate<Inscription>() {
+            @Override
+            public boolean evaluate(Inscription inscription) {
+                return inscription.isActive();
+            }
+        });
 
         //Il faut ajouter les données à afficher à l'HTML
         model.addAttribute("planningActivites", planningActivites);
