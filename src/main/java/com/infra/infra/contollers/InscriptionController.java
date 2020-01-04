@@ -50,55 +50,46 @@ public class InscriptionController {
 
     @RequestMapping(value = "/inscription-session", method = RequestMethod.POST)
     public String inscriptionSession(@RequestParam("session_id") int sessionId,
-                                      @RequestParam("inscription_type") String inscriptionType,
+                                     @RequestParam("inscription_type") String inscriptionType,
                                      Model model) {
 
         User user = userService.getConnectedUser();
         Session session = sessionService.getById(sessionId);
         boolean titular = true;
-        if (inscriptionType.equals("optionnel"))
-        {
+        if (inscriptionType.equals("optionnel")) {
             titular = false;
         }
 
         InscriptionService.PossibleRegistration possibleRegistration =
-                inscriptionService.isRegistrationPossible(user,session,titular);
+                inscriptionService.isRegistrationPossible(user, session, titular);
 
-        if (possibleRegistration == InscriptionService.PossibleRegistration.REGISTRATION_POSSIBLE)
-        {
-            Inscription inscription = inscriptionService.create(new Inscription(user,session,titular,
-                    session.getNextSessionDate(),null));
-            model.addAttribute("inscription",inscription);
+        if (possibleRegistration == InscriptionService.PossibleRegistration.REGISTRATION_POSSIBLE) {
+            Inscription inscription = inscriptionService.create(new Inscription(user, session, titular,
+                    session.getNextSessionDate(), null));
+            model.addAttribute("inscription", inscription);
             return "inscription-completed";
-        }
-        else
-        {
+        } else {
             String errorMessage = "";
-            if (possibleRegistration == InscriptionService.PossibleRegistration.ALREADY_REGISTERED)
-            {
+            if (possibleRegistration == InscriptionService.PossibleRegistration.ALREADY_REGISTERED) {
                 errorMessage = "Vous êtes déjà inscrit à cette activité";
             }
-            if (possibleRegistration == InscriptionService.PossibleRegistration.FULL_CAPACITY)
-            {
+            if (possibleRegistration == InscriptionService.PossibleRegistration.FULL_CAPACITY) {
                 errorMessage = "Il n'y a plus de place pour cette session";
             }
-            if (possibleRegistration == InscriptionService.PossibleRegistration.LIMIT_PER_GROUP_REACHED)
-            {
+            if (possibleRegistration == InscriptionService.PossibleRegistration.LIMIT_PER_GROUP_REACHED) {
                 errorMessage = "Vous ne pouvez pas vous inscrire dans deux activités du meme groupe";
             }
-            model.addAttribute("errorMessage",errorMessage);
+            model.addAttribute("errorMessage", errorMessage);
             return "inscription-error";
         }
-
 
 
     }
 
     @RequestMapping("/sessions/{id}/signup")
-    public String signup(@PathVariable("id") long id, Model model)
-    {
+    public String signup(@PathVariable("id") long id, Model model) {
         Session session = sessionService.getById(id);
-        model.addAttribute("sessiont",session);
+        model.addAttribute("sessiont", session);
         return "inscription-session";
     }
 
@@ -109,7 +100,15 @@ public class InscriptionController {
         List<Inscription> planningActivites = new ArrayList<Inscription>();
         for (int i = 0; i < listeInscription.size(); i++) {
             if (listeInscription.get(i).getUser().getId() == user_id) {
-                planningActivites.add(listeInscription.get(i));
+                if (!listeInscription.get(i).isTitular()) {
+                    if (listeInscription.get(i).getSession().getNextSessionDate(listeInscription.get(i).getInscriptionDate()).isAfter(LocalDateTime.now())) {
+                        planningActivites.add(listeInscription.get(i));
+                    }
+                } else if (listeInscription.get(i).getDesincriptionDate() == null) {
+                    planningActivites.add(listeInscription.get(i));
+                } else if (listeInscription.get(i).getSession().getNextSessionDate(listeInscription.get(i).getDesincriptionDate()).isBefore(LocalDateTime.now())) {
+                    planningActivites.add(listeInscription.get(i));
+                }
             }
         }
 

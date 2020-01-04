@@ -87,30 +87,23 @@ public class Session {
         this.activity = activity;
     }
 
-    public boolean atFullCapacity(boolean titular)
-    {
-        if (inscriptions.size()<capacity)
+    public boolean atFullCapacity(boolean titular) {
+        if (inscriptions.size() < capacity)
             return false;
-        else
-        {
-            if (titular)
-            {
-                for (Inscription inscription:getInscriptions())
-                {
-                    if (inscription.isActive()&&!inscription.isTitular())
-                    {
+        else {
+            if (titular) {
+                for (Inscription inscription : getInscriptions()) {
+                    if (inscription.isActive() && !inscription.isTitular()) {
                         return false;
                     }
                 }
                 return true;
-            }
-            else
+            } else
                 return true;
         }
     }
 
-    private DayOfWeek getDayOfWeek()
-    {
+    private DayOfWeek getDayOfWeek() {
         if (day.equals("Lundi"))
             return DayOfWeek.MONDAY;
         if (day.equals("Mardi"))
@@ -128,9 +121,12 @@ public class Session {
         return DayOfWeek.SATURDAY;
     }
 
-    public LocalDateTime getNextSessionDate()
-    {
+    public LocalDateTime getNextSessionDate() {
         LocalDateTime now = LocalDateTime.now();
         return now.with(TemporalAdjusters.next(getDayOfWeek()));
+    }
+
+    public LocalDateTime getNextSessionDate(LocalDateTime date) {
+        return date.with(TemporalAdjusters.next(getDayOfWeek()));
     }
 }
