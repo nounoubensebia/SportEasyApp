@@ -1,44 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/style-login-inscription.css}"/>
 </head>
 <body>
-<form  method="post" action="/">
+<form  method="post" action="/addActivity">
 
 
-    <label for="name"><b>Nom</b></label>
+    <label for="name"><b>Nom de l'Activité</b></label>
     <input type="text" placeholder="Entrez votre nom" id="name"  name="name" required>
-
-
-
-    <label for="Sex">Your Gender ? </label>
-    <select name="Sex" id="Sex">
-        <option value="1">Homme</option>
-        <option value="0">Femme</option>
+    <select name="groupeId" id="groupeId">
+        <option th:text="${groupe.getId()}" th:value="${groupe.getId()}"></option>
     </select>
-
-
-    <input type="date" name="date" id="date" required placeholder="Date of Birth">
-
-    <!--<div>
-        <input type="text" name="input" placeholder="YYYY-MM-DD" required
-               pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
-               title="Enter a date in this format YYYY-MM-DD"/>
-    </div>-->
-
-    <label for="email"><b>Adresse mail</b></label>
-    <input type="email" placeholder="Adresse mail" id="email" name="email" required >
-
-
-    <label for="psw"><b>Mot de passe</b></label>
-    <input type="password" placeholder="Mot de passe" id="psw" name="psw" required>
-
-    <label for="cpsw"><b>Confirmation du mot de passe</b></label>
-    <input type="password" id="cpsw" required>
 
     <button type="submit">Valider</button>
     <button type="reset">Vider</button>

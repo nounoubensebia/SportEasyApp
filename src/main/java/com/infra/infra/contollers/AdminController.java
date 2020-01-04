@@ -3,6 +3,7 @@ package com.infra.infra.contollers;
 
 import com.infra.infra.models.Activity;
 import com.infra.infra.models.Groupe;
+import com.infra.infra.services.activity.ActivityService;
 import com.infra.infra.services.groupe.GroupeService;
 import com.infra.infra.services.session.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,16 @@ import java.util.List;
 public class AdminController {
 
     private GroupeService groupeService;
-    private SessionService sessionService;
+    private ActivityService activityService;
     @Autowired
     public void setGroupeService(GroupeService groupeService) {
         this.groupeService = groupeService; }
-    @Autowired
 
-    public void setSessionService(SessionService sessionService) {
-        this.sessionService = sessionService; }
+    public void setActivityService(ActivityService activityService) {
+        this.activityService = activityService;
+    }
+
+
 
     @GetMapping("/admin-home")
     public String getAdminHome(Model model){
@@ -43,6 +46,7 @@ public class AdminController {
             groupeService.create(groupe);
             int tmp=groupeService.getAll().size();
             long index=groupeService.getAll().get(tmp-1).getId();
+
             groupe=groupeService.getById(index);
 
        }else {
@@ -51,5 +55,14 @@ public class AdminController {
 
         model.addAttribute("groupe",groupe);
         return "adminAddActivity";
+    }
+
+    @PostMapping("/addActivity")
+    public String addActivity(@RequestParam Long groupeId,@RequestParam String name,Model model){
+        Activity activity=new Activity();
+        activity.setActivityName(name);
+        activity.setGroupe(groupeService.getById(groupeId));
+        activityService.create(activity);
+        return "adminHome";
     }
 }
