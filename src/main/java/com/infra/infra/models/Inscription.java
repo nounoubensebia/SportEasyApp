@@ -91,7 +91,6 @@ public class Inscription {
     // check if inscription is currently active ie if optional not expired and if titular not unregistered
     public boolean isActive()
     {
-        List<Inscription> inscriptions = new ArrayList<>(user.getInscriptions());
         if (titular) {
             LocalDateTime desincriptionDate = getDesincriptionDate();
             if (desincriptionDate == null || desincriptionDate.isBefore(LocalDateTime.now())) {
