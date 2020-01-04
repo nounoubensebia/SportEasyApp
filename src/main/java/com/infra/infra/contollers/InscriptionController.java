@@ -66,7 +66,6 @@ public class InscriptionController {
 
         if (possibleRegistration == InscriptionService.PossibleRegistration.REGISTRATION_POSSIBLE)
         {
-            //TODO get next session date
             Inscription inscription = inscriptionService.create(new Inscription(user,session,titular,
                     session.getNextSessionDate(),null));
             model.addAttribute("inscription",inscription);
