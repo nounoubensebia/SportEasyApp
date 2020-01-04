@@ -117,7 +117,7 @@ public class InscriptionController {
         CollectionUtils.filter(planningActivites, new Predicate<Inscription>() {
             @Override
             public boolean evaluate(Inscription inscription) {
-                return inscription.isActive();
+                return !inscription.isActive();
             }
         });
 
