@@ -92,22 +92,13 @@ public class Inscription {
     public boolean isActive()
     {
         List<Inscription> inscriptions = new ArrayList<>(user.getInscriptions());
-        if (titular)
-        {
-            for (Inscription inscription:inscriptions)
-            {
-                if (inscription.getSession().getActivity().equals(this.getSession().getActivity())&&
-                !inscription.titular&&inscription.isOptionalActive())
-                {
-                    return false;
-                }
-                if (inscription.getDesincriptionDate()!=null&&
-                        inscription.getDesincriptionDate().isAfter(LocalDateTime.now()))
-                {
-                    return false;
-                }
+        if (titular) {
+            LocalDateTime desincriptionDate = getDesincriptionDate();
+            if (desincriptionDate == null || desincriptionDate.isBefore(LocalDateTime.now())) {
+                return true;
+            } else {
+                return false;
             }
-            return true;
         }
         else
         {
