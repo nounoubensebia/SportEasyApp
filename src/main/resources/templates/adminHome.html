@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(groupes)}">
+
+        <details th:each="groupe: ${groupes}">
+            <summary th:text="${groupe.groupName}"></summary>
+            <div th:each="activity: ${groupe.getActivities()}">
+                <p th:text="${activity.getActivityName() }"></p>
+                <a href="TODO"><button  type="button">Suprimer activité </button> </a>
+            </div>
+            <a th:href="@{/admin-home/{id}(id = ${groupe.getId()})}"><button  type="button">Add activité </button></a>
+
+        </details>
+        <div>
+            <a th:href="@{/admin-home/{id}(id =-1)}"><button  type="button">Add Groupe </button></a>
+        </div>
+
+</div>
+</body>
+</html>

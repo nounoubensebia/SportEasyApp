@@ -7,21 +7,19 @@
     <link rel="stylesheet" type="text/css" th:href="@{/styles/style-login-inscription.css}"/>
 </head>
 <body>
-<form  method="post" action="/first-inscription">
+<form  method="post" action="/">
 
-    <h1> Inscription</h1>
-    <label for="lname"><b>Nom</b></label>
-    <input type="text" placeholder="Entrez votre nom" id="lname"  name="lname" required>
 
-    <label for="fname"><b>Prénom</b></label>
-    <input type="text" placeholder="Entrez votre prénom" id="fname"  name="fname" required>
+    <label for="name"><b>Nom</b></label>
+    <input type="text" placeholder="Entrez votre nom" id="name"  name="name" required>
+
 
 
     <label for="Sex">Your Gender ? </label>
-   <select name="Sex" id="Sex">
-    <option value="1">Homme</option>
-    <option value="0">Femme</option>
-   </select>
+    <select name="Sex" id="Sex">
+        <option value="1">Homme</option>
+        <option value="0">Femme</option>
+    </select>
 
 
     <input type="date" name="date" id="date" required placeholder="Date of Birth">
