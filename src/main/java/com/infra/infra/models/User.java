@@ -159,6 +159,10 @@ public class User implements UserDetails {
         }
     }
 
+    public void setPasswordRaw(String password) {
+        this.password = password;
+    }
+
     public void setInscriptions(List<Inscription> inscriptions) {
         this.inscriptions = inscriptions;
     }

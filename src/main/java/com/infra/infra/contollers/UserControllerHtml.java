@@ -1,5 +1,6 @@
 package com.infra.infra.contollers;
 
+import com.infra.infra.BCryptManagerUtil;
 import com.infra.infra.models.User;
 import com.infra.infra.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,45 @@ public class UserControllerHtml {
     //TODO : metre email en rouge et ne pas suprimer les autres champs du formulaire+ affichage que mail existe deja
     @GetMapping("/first-inscription")
     public String requestFirstInscription(Model model){return "inscription";}
+
+
+    @GetMapping("/profile")
+    public String showProfile (Model model)
+    {
+        User user = userService.getConnectedUser();
+        model.addAttribute("user",user);
+        return "edit-profile";
+    }
+
+    @PostMapping("/edit-profile")
+    public String editProfile(@RequestParam("email") String email,
+                              @RequestParam("last_name") String lastName,
+                              @RequestParam("first_name") String firstName,
+                              @RequestParam("gender") String gender,
+                              @RequestParam("password") String password,
+                              @RequestParam("birth_date") Date birthDate,
+                              Model model)
+    {
+        User user = userService.getConnectedUser();
+        if (userService.checkEmail(email))
+        {
+            model.addAttribute("title","erreur");
+            model.addAttribute("message","Un utilisateur avec cette adresse mail existe deja");
+            return "message";
+        }
+        user.setEmail(email);
+        if (!password.equals(user.getPassword()))
+            user.setPasswordRaw(BCryptManagerUtil.passwordencoder().encode(password));
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setBirthDate(birthDate);
+        int gen = (gender.equals("male"))? 1 : 0;
+        user.setGender(gen);
+        userService.update(user);
+        model.addAttribute("title","Profile");
+        model.addAttribute("message","Les modification ont été effectuées !");
+        return "message";
+    }
 
     @PostMapping("/first-inscription")
     public  String postFirstInscription(
