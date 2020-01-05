@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -19,7 +19,7 @@
         </div>
 
         <span style="margin-left:10px; color:red;" id='wrong'></span><br/><br/>
-        <span style="margin-left:15px;"><a href="#">Je n'ai pas de compte</a></span><br/><br/>
+        <span style="margin-left:15px;"><a th:href = "@{/first-inscription}">Je n'ai pas de compte</a></span><br/><br/>
         <span style="margin-left:15px;"><a href="#">Mot de passe oublié</a></span>
     </form>
 </body>
