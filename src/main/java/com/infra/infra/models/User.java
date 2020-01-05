@@ -3,6 +3,8 @@ package com.infra.infra.models;
 import com.infra.infra.BCryptManagerUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,7 +43,8 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user",
             targetEntity = Inscription.class,
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+            fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Inscription> inscriptions;
 
     public User(String firstName, String lastName, Date birthDate, int gender, String email, String password,

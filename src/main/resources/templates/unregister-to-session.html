@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>S'inscrire</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css"/>
+</head>
+<body>
+<div class="container" >
+    <div class="row justify-content-sm-center">
+        <form th:action="@{'/inscriptions/'+${inscription.getId()}+'/unregister'}" th:method="post" id="submit_form">
+            <div class="card" style="width: fit-content; align-content: center; margin-top: 25%; background-color: #f0f0f0">
+                <div class="card-body">
+                    <div class="text-center">
+                        <h4 class="text-center"
+                            th:text="'Se désinscrire de '+${inscription.getSession().getActivity().getActivityName()}">
+                            Inscription à craft maga
+                        </h4>
+                    </div>
+                    <p class="text-center"
+                       th:text="'Session du '+${inscription.getSession().getDay()}+' '+${inscription.getSession().getStartTime().toString()}">
+                        Samedi 10h
+                    </p>
+                    <button class="btn btn-primary" id="btn-complete" style="width: 100%; font-size: 16px">
+                        Se désinscrire completement
+                    </button>
+                    <button class="btn btn-secondary" id = "btn-next-week"
+                            style="width: 100%;margin-top: 16px;font-size: 16px">
+                        Se désinscrire pour cette semaine
+                    </button>
+
+                    <input id="only_next_week" type="hidden" th:name="only_next_week" value="true">
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    var completeBtn = document.getElementById("btn-complete");
+    var nextWeekBtn = document.getElementById("btn-next-week");
+    var form = document.getElementById("submit_form");
+    var onlyNextWeekHidden = document.getElementById("only_next_week");
+    var isTitular = [[${inscription.isTitular()}]];
+    if (!isTitular===true)
+        completeBtn.style.visibility='collapse';
+    completeBtn.addEventListener("click",complete_clicked);
+    nextWeekBtn.addEventListener("click",only_next_week_clicked);
+    function complete_clicked() {
+        onlyNextWeekHidden.value = false;
+        form.submit();
+    }
+    function only_next_week_clicked() {
+        onlyNextWeekHidden.value = true;
+        form.submit();
+    }
+</script>
+</html>

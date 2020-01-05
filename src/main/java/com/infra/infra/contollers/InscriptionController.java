@@ -4,7 +4,6 @@ import com.infra.infra.models.Inscription;
 import com.infra.infra.models.Session;
 import com.infra.infra.models.User;
 import com.infra.infra.services.inscription.InscriptionService;
-import com.infra.infra.services.inscription.InscriptionServiceImpl;
 import com.infra.infra.services.session.SessionService;
 import com.infra.infra.services.user.UserService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,11 +86,44 @@ public class InscriptionController {
 
     }
 
-    @RequestMapping("/sessions/{id}/signup")
+    @RequestMapping("/sessions/{id}/register")
     public String signup(@PathVariable("id") long id, Model model) {
         Session session = sessionService.getById(id);
         model.addAttribute("sessiont", session);
-        return "inscription-session";
+        return "register-to-session";
+    }
+
+    @RequestMapping( value = "/inscriptions/{id}/unregister", method = RequestMethod.GET)
+    public String unregisterGet(@PathVariable("id") long id, Model model)
+    {
+        Inscription inscription = inscriptionService.getById(id);
+        model.addAttribute("inscription", inscription);
+        return "unregister-to-session";
+    }
+
+    @RequestMapping( value = "/inscriptions/{id}/unregister", method = RequestMethod.POST)
+    public String unregisterPost(@PathVariable("id") int id,
+                                 @RequestParam("only_next_week") boolean onlyNextWeek, Model model)
+    {
+        Inscription inscription = inscriptionService.getById(id);
+        if (inscription==null || !inscription.isActive())
+        {
+            model.addAttribute("title","erreur");
+            model.addAttribute("message","Une erreur s'est produite");
+            return "message";
+        }
+        if (inscription.isTitular()&&onlyNextWeek)
+        {
+            inscription.setDesincriptionDate(inscription.getSession().getNextSessionDate());
+            inscriptionService.update(inscription);
+        }
+        else
+        {
+            inscriptionService.delete(inscription);
+        }
+        model.addAttribute("title","Désinscription");
+        model.addAttribute("message","Vous vous êtes désinscrit de cette session");
+        return "message";
     }
 
     @RequestMapping("/planningActivites")

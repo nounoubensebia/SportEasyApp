@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>S'inscrire</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css"/>
+</head>
+<body>
+        <div class="container" >
+            <div class="row justify-content-sm-center">
+                <form th:action="@{/inscription-session}" th:method="post" id="submit_form">
+                    <div class="card" style="width: fit-content; align-content: center; margin-top: 25%; background-color: #f0f0f0">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h4 class="text-center"
+                                    th:text="'Inscription à '+${sessiont.getActivity().getActivityName()}">
+                                    Inscription à craft maga
+                                </h4>
+                            </div>
+                            <p class="text-center"
+                               th:text="'Session du '+${sessiont.getDay()}+' '+${sessiont.getStartTime().toString()}">
+                                Samedi 10h
+                            </p>
+                            <button class="btn btn-primary" id="btn-titulaire" style="width: 100%; font-size: 16px">
+                                Inscription en titulaire
+                            </button>
+                            <button class="btn btn-secondary" id = "btn-optionnel"
+                                    style="width: 100%;margin-top: 16px;font-size: 16px">
+                                Inscription en optionnel
+                            </button>
+                            <input type="hidden" th:name="session_id" th:id="session_id" th:value="${sessiont.id}">
+                            <input type="hidden" name="inscription_type" id = "inscription_type" value="titular">
+                        </div>
+                    </div>
+
+                    <input type="hidden" th:name="session_id" th:id="session_id" th:value="${sessiont.id}">
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="alert alert-light" style="align-content: center; font-size: 14px">
+                    Une inscription en optionnel n'est valable que pour une semaine
+                </div>
+            </div>
+        </div>
+</body>
+<script>
+    var titularBtn = document.getElementById("btn-titulaire");
+    var optionalBtn = document.getElementById("btn-optionnel");
+    var form = document.getElementById("submit-form");
+    var inscriptionType = document.getElementById("inscription_type");
+    titularBtn.addEventListener("click",titular_clicked);
+    optionalBtn.addEventListener("click",optional_clicked);
+    function titular_clicked() {
+        inscriptionType.value = 'titular';
+        form.submit();
+    }
+    function optional_clicked() {
+        inscriptionType.value = 'optionnel';
+        form.submit();
+    }
+</script>
+</html>

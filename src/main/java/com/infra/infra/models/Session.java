@@ -1,6 +1,8 @@
 package com.infra.infra.models;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -29,7 +31,8 @@ public class Session {
 
     @OneToMany(mappedBy = "session",
             targetEntity = Inscription.class,
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+            fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Inscription> inscriptions;
 
     public Session(Time startTime, String day, int capacity, Activity activity, List<Inscription> inscriptions) {
@@ -123,6 +126,9 @@ public class Session {
 
     public LocalDateTime getNextSessionDate() {
         LocalDateTime now = LocalDateTime.now();
+        now = now.withHour(startTime.toLocalTime().getHour());
+        now = now.withMinute(startTime.toLocalTime().getMinute());
+        now = now.withSecond(startTime.toLocalTime().getSecond());
         return now.with(TemporalAdjusters.next(getDayOfWeek()));
     }
 

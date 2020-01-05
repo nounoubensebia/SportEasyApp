@@ -1,5 +1,8 @@
 package com.infra.infra.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,7 +17,8 @@ public class Groupe {
 
     @OneToMany(mappedBy = "groupe",
             targetEntity = Activity.class,
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+            fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Activity> activities;
 
     public Groupe(String groupName, List<Activity> activities) {
