@@ -135,4 +135,18 @@ public class Session {
     public LocalDateTime getNextSessionDate(LocalDateTime date) {
         return date.with(TemporalAdjusters.next(getDayOfWeek()));
     }
+
+    public Inscription getLatestOptionalInscription()
+    {
+        int maxId = -1000;
+        Inscription latestInscription = null;
+        for (Inscription inscription:inscriptions)
+        {
+            if (!inscription.isTitular() && inscription.getId()>maxId)
+            {
+                latestInscription = inscription;
+            }
+        }
+        return latestInscription;
+    }
 }

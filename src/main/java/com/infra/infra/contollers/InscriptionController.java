@@ -66,6 +66,11 @@ public class InscriptionController {
         if (possibleRegistration == InscriptionService.PossibleRegistration.REGISTRATION_POSSIBLE) {
             Inscription inscription = inscriptionService.create(new Inscription(user, session, titular,
                     session.getNextSessionDate(), null));
+            if (session.atFullCapacity(false)&&inscription.isTitular())
+            {
+                Inscription latestOptionalInscription = session.getLatestOptionalInscription();
+                inscriptionService.delete(latestOptionalInscription);
+            }
             model.addAttribute("inscription", inscription);
             return "inscription-completed";
         } else {

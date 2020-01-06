@@ -4,6 +4,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -34,6 +35,7 @@ public class Inscription {
     private LocalDateTime inscriptionDate;
 
     private LocalDateTime desincriptionDate;
+
 
     public Inscription(User user, Session session, boolean titular, LocalDateTime inscriptionDate, LocalDateTime desincriptionDate) {
         this.user = user;
