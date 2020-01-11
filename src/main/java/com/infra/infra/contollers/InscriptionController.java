@@ -163,4 +163,40 @@ public class InscriptionController {
         // il faut retourner le nom du fichier HTML à afficher
         return "planningActivites";
     }
+
+    @RequestMapping("/planning")
+    public String showPlanning2(Model model)
+    {
+        User user = userService.getConnectedUser();
+        List<Inscription> inscriptions = user.getInscriptions();
+        List<Inscription> titularInscriptions = new ArrayList<>(inscriptions);
+        List<Inscription> optionalInscriptions = new ArrayList<>(inscriptions);
+
+        CollectionUtils.filter(inscriptions, new Predicate<Inscription>() {
+            @Override
+            public boolean evaluate(Inscription inscription) {
+                return inscription.isActive();
+            }
+        });
+
+        CollectionUtils.filter(titularInscriptions, new Predicate<Inscription>() {
+            @Override
+            public boolean evaluate(Inscription inscription) {
+                return inscription.isTitular();
+            }
+        });
+
+        CollectionUtils.filter(optionalInscriptions, new Predicate<Inscription>() {
+            @Override
+            public boolean evaluate(Inscription inscription) {
+                return !inscription.isTitular();
+            }
+        });
+
+        model.addAttribute("titularInscriptions",titularInscriptions);
+        model.addAttribute("optionalInscriptions",optionalInscriptions);
+
+        return "activities-planning";
+
+    }
 }

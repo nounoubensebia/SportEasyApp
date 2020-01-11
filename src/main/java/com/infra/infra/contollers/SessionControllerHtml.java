@@ -35,4 +35,6 @@ public class SessionControllerHtml {
         // il faut retourner le nom du fichier HTML à afficher
         return "listeActivites";
     }
+
+
 }

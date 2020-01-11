@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Planning</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css"/>
+</head>
+<body>
+        <div class="container" style="margin-top: 1em" th:if="${not #lists.isEmpty(titularInscriptions)}" >
+            <h3>Mes inscriptions en titulaire</h3>
+            <div class="row" style="margin-top: 1em">
+                <div class="col-3" th:each="inscription :${titularInscriptions}">
+                    <div class="card" style="align-content: center;">
+                        <div class="card-header">
+                            <h5 class="text-center" th:text="${inscription.getSession().getActivity().getActivityName()}">
+                                Yoga 1
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text" th:text="${inscription.getSession().getActivity().getGroupe().groupName}">
+                                Groupe 1</p>
+                            <p class="card-text" th:text="'Session du '+${inscription.getSession().getDay()}+' '+${inscription.getSession().getStartTime()}">
+                                Session du mardi 12h</p>
+                            <a th:href="'/inscriptions/'+${inscription.getId()+'/unregister'}" class="btn btn-secondary"
+                               style="width: 100%;font-size: 16px">
+                                Se désinscrire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 1em" th:if="${not #lists.isEmpty(optionalInscriptions)}" >
+            <h3>Mes inscriptions en optionnel</h3>
+            <div class="row" style="margin-top: 1em">
+                <div class="col-3" th:each="inscription :${optionalInscriptions}">
+                    <div class="card" style="align-content: center;">
+                        <div class="card-header">
+                            <h5 class="text-center" th:text="${inscription.getSession().getActivity().getActivityName()}">
+                                Yoga 1
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text" th:text="${inscription.getSession().getActivity().getGroupe().groupName}">
+                                Groupe 1</p>
+                            <p class="card-text" th:text="'Session du '+${inscription.getSession().getDay()}+' '+${inscription.getSession().getStartTime()}">
+                                Session du mardi 12h</p>
+                            <a th:href="'/inscriptions/'+${inscription.getId()+'/unregister'}" class="btn btn-secondary"
+                                    style="width: 100%;font-size: 16px">
+                                Se désinscrire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>
