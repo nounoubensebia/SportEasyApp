@@ -35,59 +35,11 @@
     <link rel="stylesheet" href="../static/css/fitness/css/main.css" th:href="@{/css/fitness/css/main.css}">
 </head>
 <body>
-<header id="header">
-    <div class="header-top">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-4 col-4 header-top-left no-padding">
-                    <a href="mailto:support@colorlib.com"><span class="lnr lnr-location"></span></a>
-                    <a class="contact-texts" href="mailto:support@colorlib.com">support@colorlib.com</a>
-                </div>
-                <div class="col-md-4 col-4 header-top-bottom no-padding">
-                    <a href="index.html"><img class="img-fluid" src="../static/css/fitness/img/logo.png" th:src="@{/css/fitness/img/logo.png}" alt="" title="" /></a>
-                </div>
-                <div class="col-md-4 col-4 header-top-right no-padding">
-                    <a class="contact-texts" href="tel:+440 123 12 658 439">+440 123 12 658 439</a>
-                    <a href="tel:+440 123 12 658 439"><span class="lnr lnr-phone-handset"></span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container main-menu" style="max-width: 100%;">
-        <div class="row align-items-center justify-content-center">
-            <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li class="menu-active"><a href="home">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="trainers.html">Trainers</a></li>
-                    <li class="menu-has-children"><a href="">Blog</a>
-                        <ul>
-                            <li><a href="blog-home.html">Blog Home</a></li>
-                            <li><a href="blog-single.html">Blog Single</a></li>
-                            <li class="menu-has-children"><a href="">Level 2</a>
-                                <ul>
-                                    <li><a href="#">Item One</a></li>
-                                    <li><a href="#">Item Two</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-has-children"><a href="">Pages</a>
-                        <ul>
-                            <li><a href="schedule.html">Schedule</a></li>
-                            <li><a href="packages.html">Packages</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="elements.html">Elements</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav><!-- #nav-menu-container -->
-        </div>
-    </div>
-</header><!-- #header -->
 
-        <div class="container" style="margin-top: 12em" th:if="${not #lists.isEmpty(titularInscriptions)}" >
+<div th:replace="fragments/header :: header">
+
+</div>
+        <div class="container" style="margin-top: 1em; margin-left: 0em" th:if="${not #lists.isEmpty(titularInscriptions)}" >
             <h3>Mes inscriptions en titulaire</h3>
             <div class="row" style="margin-top: 1em">
                 <div class="col-3" th:each="inscription :${titularInscriptions}">
@@ -98,6 +50,7 @@
                             </h5>
                         </div>
                         <div class="card-body">
+                            <p class="text-danger" th:if="${inscription.isActive()==false}">Non inscrit pour cette semaine</p>
                             <p class="card-text" th:text="${inscription.getSession().getActivity().getGroupe().groupName}">
                                 Groupe 1</p>
                             <p class="card-text" th:text="'Session du '+${inscription.getSession().getDay()}+' '+${inscription.getSession().getStartTime()}">
@@ -112,9 +65,9 @@
             </div>
         </div>
 
-        <div class="container" style="margin-top: 1em" th:if="${not #lists.isEmpty(optionalInscriptions)}" >
+        <div class="container" style="margin-top: 1em; margin-left: 0em;" th:if="${not #lists.isEmpty(optionalInscriptions)}" >
             <h3>Mes inscriptions en optionnel</h3>
-            <div class="row" style="margin-top: 1em">
+            <div class="row" style="margin-top: 1em; ">
                 <div class="col-3" th:each="inscription :${optionalInscriptions}">
                     <div class="card" style="align-content: center;">
                         <div class="card-header">

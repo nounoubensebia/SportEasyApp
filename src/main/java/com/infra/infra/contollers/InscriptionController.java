@@ -71,8 +71,9 @@ public class InscriptionController {
                 Inscription latestOptionalInscription = session.getLatestOptionalInscription();
                 inscriptionService.delete(latestOptionalInscription);
             }
-            model.addAttribute("inscription", inscription);
-            return "inscription-completed";
+            model.addAttribute("title", "inscription terminée");
+            model.addAttribute("message","inscription terminée");
+            return "message";
         } else {
             String errorMessage = "";
             if (possibleRegistration == InscriptionService.PossibleRegistration.ALREADY_REGISTERED) {
@@ -84,8 +85,9 @@ public class InscriptionController {
             if (possibleRegistration == InscriptionService.PossibleRegistration.LIMIT_PER_GROUP_REACHED) {
                 errorMessage = "Vous ne pouvez pas vous inscrire dans deux activités du meme groupe";
             }
-            model.addAttribute("errorMessage", errorMessage);
-            return "inscription-error";
+            model.addAttribute("message", errorMessage);
+            model.addAttribute("title","erreur");
+            return "message";
         }
 
 
@@ -111,7 +113,7 @@ public class InscriptionController {
                                  @RequestParam("only_next_week") boolean onlyNextWeek, Model model)
     {
         Inscription inscription = inscriptionService.getById(id);
-        if (inscription==null || !inscription.isActive())
+        if (inscription==null||(!inscription.isActive()&&!inscription.isTitular()))
         {
             model.addAttribute("title","erreur");
             model.addAttribute("message","Une erreur s'est produite");
@@ -170,7 +172,6 @@ public class InscriptionController {
         User user = userService.getConnectedUser();
         List<Inscription> inscriptions = user.getInscriptions();
         List<Inscription> titularInscriptions = new ArrayList<>(inscriptions);
-        List<Inscription> optionalInscriptions = new ArrayList<>(inscriptions);
 
         CollectionUtils.filter(inscriptions, new Predicate<Inscription>() {
             @Override
@@ -178,6 +179,9 @@ public class InscriptionController {
                 return inscription.isActive();
             }
         });
+
+
+        List<Inscription> optionalInscriptions = new ArrayList<>(inscriptions);
 
         CollectionUtils.filter(titularInscriptions, new Predicate<Inscription>() {
             @Override

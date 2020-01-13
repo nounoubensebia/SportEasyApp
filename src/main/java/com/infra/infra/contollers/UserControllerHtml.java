@@ -96,6 +96,6 @@ public class UserControllerHtml {
     @RequestMapping("/perform_logout")
     public String performLogout()
     {
-        return "login";
+        return "home";
     }
 }

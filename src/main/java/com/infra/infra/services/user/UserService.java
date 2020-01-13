@@ -7,6 +7,7 @@ import java.util.List;
 public interface UserService {
 
     public User getConnectedUser();
+    public boolean isUserConnected();
     public List<User> getAll();
     public User getById(long id);
     public void create(User user);

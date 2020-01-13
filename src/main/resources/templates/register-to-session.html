@@ -34,62 +34,13 @@
     <link rel="stylesheet" href="../static/css/fitness/css/main.css" th:href="@{/css/fitness/css/main.css}">
 </head>
 <body>
-<header id="header">
-    <div class="header-top">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-4 col-4 header-top-left no-padding">
-                    <a href="mailto:support@colorlib.com"><span class="lnr lnr-location"></span></a>
-                    <a class="contact-texts" href="mailto:support@colorlib.com">support@colorlib.com</a>
-                </div>
-                <div class="col-md-4 col-4 header-top-bottom no-padding">
-                    <a href="index.html"><img class="img-fluid" src="../static/css/fitness/img/logo.png" th:src="@{/css/fitness/img/logo.png}" alt="" title="" /></a>
-                </div>
-                <div class="col-md-4 col-4 header-top-right no-padding">
-                    <a class="contact-texts" href="tel:+440 123 12 658 439">+440 123 12 658 439</a>
-                    <a href="tel:+440 123 12 658 439"><span class="lnr lnr-phone-handset"></span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container main-menu" style="max-width: 100%;">
-        <div class="row align-items-center justify-content-center">
-            <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li class="menu-active"><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="trainers.html">Trainers</a></li>
-                    <li class="menu-has-children"><a href="">Blog</a>
-                        <ul>
-                            <li><a href="blog-home.html">Blog Home</a></li>
-                            <li><a href="blog-single.html">Blog Single</a></li>
-                            <li class="menu-has-children"><a href="">Level 2</a>
-                                <ul>
-                                    <li><a href="#">Item One</a></li>
-                                    <li><a href="#">Item Two</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-has-children"><a href="">Pages</a>
-                        <ul>
-                            <li><a href="schedule.html">Schedule</a></li>
-                            <li><a href="packages.html">Packages</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="elements.html">Elements</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav><!-- #nav-menu-container -->
-        </div>
-    </div>
-</header><!-- #header -->
 
-        <div class="container" style="margin:auto; margin-top: 10em; margin-bottom: 5%; width: 50%;">
+<div th:replace="fragments/header :: header"></div>
+
+        <div class="container" style="  margin-bottom: 5%; width: 50%;">
             <div class="row justify-content-sm-center">
                 <form th:action="@{/inscription-session}" th:method="post" id="submit_form">
-                    <div class="card" style="width: fit-content; align-content: center; margin-top: 25%; background-color: #f0f0f0">
+                    <div class="card" style="width: fit-content; margin-top: 25%; align-content: center; background-color: #f0f0f0">
                         <div class="card-body">
                             <div class="text-center">
                                 <h4 class="text-center"
@@ -126,7 +77,7 @@
         </div>
 </body>
 
-<!-- start footer Area -->
+<!-- start footer Area
 <footer class="footer-area section-gap">
     <div class="container">
         <div class="row">
@@ -174,9 +125,9 @@
             </div>
         </div>
         <div class="footer-bottom row align-items-center">
-            <p class="footer-text m-0 col-lg-6 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <p class="footer-text m-0 col-lg-6 col-md-12">Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
                 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                 Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p>
             <div class="col-lg-6 col-sm-12 footer-social">
                 <a href="#"><i class="fa fa-facebook"></i></a>
                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -186,7 +137,13 @@
         </div>
     </div>
 </footer>
-<!-- End footer Area -->
+End footer Area -->
+
+
+<!-- Footer -->
+<!-- Footer -->
+<!-- Footer -->
+
 
 <script src="../static/css/fitness/js/vendor/jquery-2.2.4.min.js" th:src="@{/css/fitness/js/vendor/jquery-2.2.4.min.js}" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
