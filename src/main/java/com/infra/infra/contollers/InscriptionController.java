@@ -50,29 +50,22 @@ public class InscriptionController {
     }
 
 
-    @RequestMapping(value = "/inscription-session-json", method = RequestMethod.POST)
+    @RequestMapping(value = "/inscription-session-json/{id}", method = RequestMethod.GET)
     @ResponseBody
-    String getInscription(@RequestParam("session_id") int sessionId,
-                               @RequestParam("inscription_type") String inscriptionType)
+    String getInscription(@PathVariable("id") int sessionId,
+                               @RequestParam("type") String titulara)
     {
         User user = userService.getConnectedUser();
         Session session = sessionService.getById(sessionId);
         boolean titular = true;
-        if (inscriptionType.equals("optionnel")) {
+        if (titulara.equals("optionnel")) {
             titular = false;
         }
         InscriptionService.PossibleRegistration possibleRegistration =
                 inscriptionService.isRegistrationPossible(user, session, titular);
 
         if (possibleRegistration == InscriptionService.PossibleRegistration.REGISTRATION_POSSIBLE) {
-            Inscription inscription = inscriptionService.create(new Inscription(user, session, titular,
-                    session.getNextSessionDate(), null));
-            if (session.atFullCapacity(false)&&inscription.isTitular())
-            {
-                Inscription latestOptionalInscription = session.getLatestOptionalInscription();
-                inscriptionService.delete(latestOptionalInscription);
-            }
-            return "inscription effectuée";
+            return "ok";
         } else {
             String errorMessage = "";
             if (possibleRegistration == InscriptionService.PossibleRegistration.ALREADY_REGISTERED) {
@@ -113,9 +106,9 @@ public class InscriptionController {
                 Inscription latestOptionalInscription = session.getLatestOptionalInscription();
                 inscriptionService.delete(latestOptionalInscription);
             }
-            model.addAttribute("title", "inscription terminée");
-            model.addAttribute("message","inscription terminée");
-            return "inscription-completed";
+            //model.addAttribute("title", "inscription terminée");
+            //model.addAttribute("message","inscription terminée");
+            return "planning";
         } else {
             String errorMessage = "";
             if (possibleRegistration == InscriptionService.PossibleRegistration.ALREADY_REGISTERED) {
