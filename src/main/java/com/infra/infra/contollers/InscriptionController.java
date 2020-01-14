@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class InscriptionController {
     @RequestMapping(value = "/inscription-session", method = RequestMethod.POST)
     public String inscriptionSession(@RequestParam("session_id") int sessionId,
                                      @RequestParam("inscription_type") String inscriptionType,
-                                     Model model) {
+                                     Model model, HttpServletResponse httpServletResponse) {
 
         User user = userService.getConnectedUser();
         Session session = sessionService.getById(sessionId);
@@ -108,7 +109,7 @@ public class InscriptionController {
             }
             //model.addAttribute("title", "inscription terminée");
             //model.addAttribute("message","inscription terminée");
-            return "planning";
+            return "redirect:planning";
         } else {
             String errorMessage = "";
             if (possibleRegistration == InscriptionService.PossibleRegistration.ALREADY_REGISTERED) {
@@ -142,6 +143,7 @@ public class InscriptionController {
         model.addAttribute("inscription", inscription);
         return "unregister-to-session";
     }
+    
 
     @RequestMapping( value = "/inscriptions/{id}/unregister", method = RequestMethod.POST)
     public String unregisterPost(@PathVariable("id") int id,

@@ -183,7 +183,6 @@ End footer Area -->
                 if (xmlhttp.responseText=="ok")
                 {
                     var form = document.getElementById("submit_form");
-                    //window.alert(xmlhttp.responseText);
                     window.alert("inscription terminée");
                     inscriptionType.value = 'titular';
                     window.location.href = "/planning";
@@ -197,13 +196,30 @@ End footer Area -->
                 }
             }
         };
-
         xmlhttp.open("get",url);
         xmlhttp.send();
     }
     function optional_clicked() {
-        inscriptionType.value = 'optionnel';
-        //form.submit();
+        var xmlhttp = new XMLHttpRequest();
+        var id = /*[[${sessiont.id}]]*/ '-1';
+        var url = "/inscription-session-json/"+id+"?type=optionnel";
+        xmlhttp.onreadystatechange = function (ev) {
+            if (this.readyState === 4 && this.status === 200) {
+                if (xmlhttp.responseText=="ok")
+                {
+                    var form = document.getElementById("submit_form");
+                    window.alert("inscription terminée");
+                    inscriptionType.value = 'optionnel';
+                    form.submit();
+                }
+                else
+                {
+                    window.alert(xmlhttp.responseText);
+                }
+            }
+        };
+        xmlhttp.open("get",url);
+        xmlhttp.send();
     }
     /*]]>*/
 </script>
