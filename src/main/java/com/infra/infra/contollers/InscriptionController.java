@@ -1,5 +1,6 @@
 package com.infra.infra.contollers;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.infra.infra.models.Inscription;
 import com.infra.infra.models.Session;
 import com.infra.infra.models.User;
@@ -47,6 +48,47 @@ public class InscriptionController {
         return String.valueOf(inscriptionService.isRegistrationPossible(userService.getById(userId),
                 sessionService.getById(sessionId), titular));
     }
+
+
+    @RequestMapping(value = "/inscription-session-json", method = RequestMethod.POST)
+    @ResponseBody
+    String getInscription(@RequestParam("session_id") int sessionId,
+                               @RequestParam("inscription_type") String inscriptionType)
+    {
+        User user = userService.getConnectedUser();
+        Session session = sessionService.getById(sessionId);
+        boolean titular = true;
+        if (inscriptionType.equals("optionnel")) {
+            titular = false;
+        }
+        InscriptionService.PossibleRegistration possibleRegistration =
+                inscriptionService.isRegistrationPossible(user, session, titular);
+
+        if (possibleRegistration == InscriptionService.PossibleRegistration.REGISTRATION_POSSIBLE) {
+            Inscription inscription = inscriptionService.create(new Inscription(user, session, titular,
+                    session.getNextSessionDate(), null));
+            if (session.atFullCapacity(false)&&inscription.isTitular())
+            {
+                Inscription latestOptionalInscription = session.getLatestOptionalInscription();
+                inscriptionService.delete(latestOptionalInscription);
+            }
+            return "inscription effectuée";
+        } else {
+            String errorMessage = "";
+            if (possibleRegistration == InscriptionService.PossibleRegistration.ALREADY_REGISTERED) {
+                return "Vous êtes déjà inscrit à cette activité";
+            }
+            if (possibleRegistration == InscriptionService.PossibleRegistration.FULL_CAPACITY) {
+                return "Il n'y a plus de place pour cette session";
+            }
+            if (possibleRegistration == InscriptionService.PossibleRegistration.LIMIT_PER_GROUP_REACHED) {
+                return "Vous ne pouvez pas vous inscrire dans deux activités du meme groupe";
+            }
+        }
+
+        return "";
+    }
+
 
     @RequestMapping(value = "/inscription-session", method = RequestMethod.POST)
     public String inscriptionSession(@RequestParam("session_id") int sessionId,

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 
 @Controller
@@ -22,8 +23,8 @@ public class UserController {
 
     //Methodes Tester
     //TODO : metre email en rouge et ne pas suprimer les autres champs du formulaire+ affichage que mail existe deja
-    @GetMapping("/first-inscription")
-    public String requestFirstInscription(Model model){return "inscription";}
+    @GetMapping("/join")
+    public String requestFirstInscription(Model model){return "join";}
 
 
     @GetMapping("/profile")
@@ -73,6 +74,8 @@ public class UserController {
             @RequestParam("psw") String psw,
             @RequestParam("date") Date date,
             Model model){
+
+
 
         if (userService.checkEmail(email)){//ce mail est déja USED
             model.addAttribute("checkMail", "The user "+email+" already exists !!");

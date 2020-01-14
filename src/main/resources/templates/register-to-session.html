@@ -166,10 +166,19 @@ End footer Area -->
     var inscriptionType = document.getElementById("inscription_type");
     titularBtn.addEventListener("click",titular_clicked);
     optionalBtn.addEventListener("click",optional_clicked);
+    var xmlhttp = new XMLHttpRequest();
+    var url = "/inscription-session";
+    var sessionId = /*[[${sessiont.getId()}]]*/
     function titular_clicked() {
         inscriptionType.value = 'titular';
+        xmlhttp.onreadystatechange = function (ev) {
+            if (this.readyState === 4 && this.status === 200) {
+                var myArr = JSON.parse(this.responseText);
+                console.log(myArr);
+            }
+        };
         form.submit();
-    }
+    };
     function optional_clicked() {
         inscriptionType.value = 'optionnel';
         form.submit();
