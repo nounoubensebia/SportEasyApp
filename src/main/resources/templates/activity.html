@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <p class="card-text" th:text="'Le '+${sessiont.getDay()}+' à '+${sessiont.getTimeString()}">
                         Session du mardi 12h</p>
-                    <a th:if= "${isUserConnected == true}" th:href="'/sessions/' + ${sessiont.getId()}+'/register/'" class="btn btn-secondary"
+                    <a th:href="'/sessions/' + ${sessiont.getId()}+'/register/'" class="btn btn-secondary"
                        style="width: 100%;font-size: 16px">
                         S'inscrire
                     </a>
