@@ -186,11 +186,14 @@ End footer Area -->
                     //window.alert(xmlhttp.responseText);
                     window.alert("inscription terminée");
                     inscriptionType.value = 'titular';
+                    window.location.href = "/planning";
                     form.submit();
                 }
                 else
                 {
                     window.alert(xmlhttp.responseText);
+
+                    window.location.href = "/planning";
                 }
             }
         };
