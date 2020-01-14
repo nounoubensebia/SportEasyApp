@@ -10,14 +10,14 @@
 
 
     <div class="container" style="margin-top: 1em; margin-left: 0em" >
-    <h3>Choisir une session</h3>
+    <h3>Sessions</h3>
     <div class="row" style="margin-top: 1em">
         <div class="col-3" th:each="sessiont :${activity.getSessions()}">
             <div class="card" style="align-content: center;">
                 <div class="card-body">
-                    <p class="card-text" th:text="'Session du '+${sessiont.getDay()}+' '+${sessiont.getStartTime()}">
+                    <p class="card-text" th:text="'Le '+${sessiont.getDay()}+' à '+${sessiont.getTimeString()}">
                         Session du mardi 12h</p>
-                    <a th:href="'/sessions/' + ${sessiont.getId()}+'/register/'" class="btn btn-secondary"
+                    <a th:if= "${isUserConnected == true}" th:href="'/sessions/' + ${sessiont.getId()}+'/register/'" class="btn btn-secondary"
                        style="width: 100%;font-size: 16px">
                         S'inscrire
                     </a>

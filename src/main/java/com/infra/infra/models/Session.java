@@ -1,5 +1,6 @@
 package com.infra.infra.models;
 
+import com.infra.infra.Utils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -148,5 +149,10 @@ public class Session {
             }
         }
         return latestInscription;
+    }
+
+    public String getTimeString()
+    {
+        return Utils.getTimeString(startTime);
     }
 }

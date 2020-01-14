@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class HomeControllerHtml {
+public class IndexController {
 
     private GroupeService groupeService;
 
@@ -28,8 +28,8 @@ public class HomeControllerHtml {
     }
 
     //Requestmapping pour définir la route
-    @RequestMapping("/home")
-    public String showGroupes(Model model)
+    @RequestMapping("/")
+    public String showIndex(Model model)
     {
 
         boolean isUserConnected = userService.isUserConnected();
@@ -42,7 +42,7 @@ public class HomeControllerHtml {
         model.addAttribute("isUserConnected",isUserConnected);
 
         // il faut retourner le nom du fichier HTML à afficher
-        return "home";
+        return "index";
     }
 
 }

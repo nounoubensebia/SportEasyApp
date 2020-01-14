@@ -73,7 +73,7 @@ public class InscriptionController {
             }
             model.addAttribute("title", "inscription terminée");
             model.addAttribute("message","inscription terminée");
-            return "message";
+            return "inscription-completed";
         } else {
             String errorMessage = "";
             if (possibleRegistration == InscriptionService.PossibleRegistration.ALREADY_REGISTERED) {
@@ -133,74 +133,4 @@ public class InscriptionController {
         return "message";
     }
 
-    @RequestMapping("/planningActivites")
-    public String showPlanning(Model model) {
-        User user = userService.getConnectedUser();
-
-        List<Inscription> planningActivites = new ArrayList<Inscription>(user.getInscriptions());
-        /*for (int i = 0; i < listeInscription.size(); i++) {
-            if (listeInscription.get(i).getUser().getId() == user_id) {
-                if (!listeInscription.get(i).isTitular()) {
-                    if (listeInscription.get(i).getSession().getNextSessionDate(listeInscription.get(i).getInscriptionDate()).isAfter(LocalDateTime.now())) {
-                        planningActivites.add(listeInscription.get(i));
-                    }
-                } else if (listeInscription.get(i).getDesincriptionDate() == null) {
-                    planningActivites.add(listeInscription.get(i));
-                } else if (listeInscription.get(i).getSession().getNextSessionDate(listeInscription.get(i).getDesincriptionDate()).isBefore(LocalDateTime.now())) {
-                    planningActivites.add(listeInscription.get(i));
-                }
-            }
-        }*/
-
-        CollectionUtils.filter(planningActivites, new Predicate<Inscription>() {
-            @Override
-            public boolean evaluate(Inscription inscription) {
-                return inscription.isActive();
-            }
-        });
-
-        //Il faut ajouter les données à afficher à l'HTML
-        model.addAttribute("planningActivites", planningActivites);
-
-        // il faut retourner le nom du fichier HTML à afficher
-        return "planningActivites";
-    }
-
-    @RequestMapping("/planning")
-    public String showPlanning2(Model model)
-    {
-        User user = userService.getConnectedUser();
-        List<Inscription> inscriptions = user.getInscriptions();
-        List<Inscription> titularInscriptions = new ArrayList<>(inscriptions);
-
-        CollectionUtils.filter(inscriptions, new Predicate<Inscription>() {
-            @Override
-            public boolean evaluate(Inscription inscription) {
-                return inscription.isActive();
-            }
-        });
-
-
-        List<Inscription> optionalInscriptions = new ArrayList<>(inscriptions);
-
-        CollectionUtils.filter(titularInscriptions, new Predicate<Inscription>() {
-            @Override
-            public boolean evaluate(Inscription inscription) {
-                return inscription.isTitular();
-            }
-        });
-
-        CollectionUtils.filter(optionalInscriptions, new Predicate<Inscription>() {
-            @Override
-            public boolean evaluate(Inscription inscription) {
-                return !inscription.isTitular();
-            }
-        });
-
-        model.addAttribute("titularInscriptions",titularInscriptions);
-        model.addAttribute("optionalInscriptions",optionalInscriptions);
-
-        return "activities-planning";
-
-    }
 }

@@ -52,7 +52,7 @@
                     <p>
                         Thinking about overseas adventure travel? Have you put any thought into the best places to go when it comes to overseas adventure travel? Nepal is one of the most popular places of all.
                     </p>
-                    <a href="/first-inscription" class="primary-btn">Become a Member</a>
+                    <a href="/join" class="primary-btn">Become a Member</a>
                 </div>
             </div>
         </div>
@@ -69,13 +69,13 @@
         <div class="row">
             <div class="active-topcourse-carusel" th:if="${not #lists.isEmpty(groupes)}">
                 <div th:each="groupe: ${groupes}" th:remove="tag">
-                    <div class="single-carusel item" th:each="activity: ${groupe.getActivities()}">
-                        <div class="thumb">
+                    <div class="single-carusel item" th:each="activity: ${groupe.getActivities()}" >
+                        <div class="thumb" th:href="'/activities/'+${activity.getId()}">
                             <img class="img-fluid" src="../static/css/fitness/img/c1.jpg" th:src="@{/css/fitness/img/c1.jpg}" alt="">
                             <div class="join-btn"><a th:href="'activities/'+${activity.getId()}">S'inscrire</a></div>
                         </div>
                         <div class="title-price d-flex justify-content-between">
-                            <a href="#">
+                            <a th:href="'/activities/'+${activity.getId()}">
                                 <h4 th:text="${activity.getActivityName()}"></h4>
                             </a>
                         </div>

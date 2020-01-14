@@ -12,7 +12,7 @@ import java.sql.Date;
 
 
 @Controller
-public class UserControllerHtml {
+public class UserController {
 
     private UserService userService;
     @Autowired
@@ -51,7 +51,7 @@ public class UserControllerHtml {
             return "message";
         }
         user.setEmail(email);
-        if (!password.equals(user.getPassword()))
+        if (!password.equals(""))
             user.setPasswordRaw(BCryptManagerUtil.passwordencoder().encode(password));
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -64,7 +64,7 @@ public class UserControllerHtml {
         return "message";
     }
 
-    @PostMapping("/first-inscription")
+    @PostMapping("/join")
     public  String postFirstInscription(
             @RequestParam("email") String email,
             @RequestParam("lname") String lname,
@@ -76,7 +76,7 @@ public class UserControllerHtml {
 
         if (userService.checkEmail(email)){//ce mail est déja USED
             model.addAttribute("checkMail", "The user "+email+" already exists !!");
-            return "inscription";
+            return "join";
         }else {
             User personForm =new User();
             personForm.setLastName(lname);

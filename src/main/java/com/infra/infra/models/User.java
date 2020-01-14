@@ -96,7 +96,10 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.commaSeparatedStringToAuthorityList("user");
+        if (!isAdmin)
+            return AuthorityUtils.commaSeparatedStringToAuthorityList("user");
+        else
+            return AuthorityUtils.commaSeparatedStringToAuthorityList("user, admin");
     }
 
     public String getPassword() {
