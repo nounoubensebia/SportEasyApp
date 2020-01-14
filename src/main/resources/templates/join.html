@@ -24,13 +24,19 @@
     <!--
     CSS
     ============================================= -->
-    <link rel="stylesheet" href="../static/css/fitness/css/linearicons.css" th:href="@{/css/fitness/css/linearicons.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/font-awesome.min.css" th:href="@{/css/fitness/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/linearicons.css"
+          th:href="@{/css/fitness/css/linearicons.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/font-awesome.min.css"
+          th:href="@{/css/fitness/css/font-awesome.min.css}">
     <link rel="stylesheet" href="../static/css/fitness/css/bootstrap.css" th:href="@{/css/fitness/css/bootstrap.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/magnific-popup.css" th:href="@{/css/fitness/css/magnific-popup.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/nice-select.css" th:href="@{/css/fitness/css/unregister-to-session.html}">
-    <link rel="stylesheet" href="../static/css/fitness/css/animate.min.css" th:href="@{/css/fitness/css/animate.min.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/owl.carousel.css" th:href="@{/css/fitness/css/owl.carousel.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/magnific-popup.css"
+          th:href="@{/css/fitness/css/magnific-popup.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/nice-select.css"
+          th:href="@{/css/fitness/css/unregister-to-session.html}">
+    <link rel="stylesheet" href="../static/css/fitness/css/animate.min.css"
+          th:href="@{/css/fitness/css/animate.min.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/owl.carousel.css"
+          th:href="@{/css/fitness/css/owl.carousel.css}">
     <link rel="stylesheet" href="../static/css/fitness/css/jquery-ui.css" th:href="@{/css/fitness/css/jquery-ui.css}">
     <link rel="stylesheet" href="../static/css/fitness/css/main.css" th:href="@{/css/fitness/css/main.css}">
 </head>
@@ -38,17 +44,17 @@
 <form method="post" action="/join" style="margin:auto; margin-top: 10em; margin-bottom: 5%; width: 50%;">
 
     <h1> Inscription</h1>
-    <label for="lname"><b>Nom</b></label>
-    <input type="text" placeholder="Entrez votre nom" id="lname"  name="lname" required>
+    <label for="lastname"><b>Nom</b></label>
+    <input type="text" placeholder="Entrez votre nom" id="lastname" name="lastname" required>
 
-    <label for="fname"><b>Prénom</b></label>
-    <input type="text" placeholder="Entrez votre prénom" id="fname"  name="fname" required>
+    <label for="firstname"><b>Prénom</b></label>
+    <input type="text" placeholder="Entrez votre prénom" id="firstname" name="firstname" required>
 
-    <label for="sex"><b>Sexe</b></label>
-   <select name="sex" id="sex">
-    <option value="1">Homme</option>
-    <option value="0">Femme</option>
-   </select>
+    <label for="gender"><b>Sexe</b></label>
+    <select name="gender" id="gender">
+        <option value="1">Homme</option>
+        <option value="0">Femme</option>
+    </select>
 
     <label for="date" style="margin-top: 2%;"><b>Date de Naissance</b></label>
     <input type="date" name="date" id="date" required placeholder="Date of Birth">
@@ -60,31 +66,39 @@
     </div>-->
 
     <label for="email"><b>Adresse mail</b></label>
-    <input type="text" placeholder="Adresse mail" id="email" name="email" required>
+    <input type="email" placeholder="Adresse mail" id="email" name="email" required>
 
 
-    <label for="psw"><b>Mot de passe</b></label><br/>
-    <input type="password" placeholder="Mot de passe" id="psw" name="psw" required>
+    <label for="password"><b>Mot de passe</b></label><br/>
+    <input type="password" placeholder="Mot de passe" id="password" name="password" minlength="5" required>
 
-    <label for="cpsw"><b>Confirmation du mot de passe</b></label>
-    <input type="password" id="cpsw" required>
+    <label for="confirm_password"><b>Confirmation du mot de passe</b></label>
+    <input type="password" placeholder="Confirmer mot de passe" id="confirm_password" name="confirm_password"
+           minlength="5" required>
 
     <button type="submit">Valider</button>
     <button type="reset" style="margin-top: 2%;">Vider</button>
 </form>
 
 
-<script src="../static/css/fitness/js/vendor/jquery-2.2.4.min.js" th:src="@{/css/fitness/js/vendor/jquery-2.2.4.min.js}" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="../static/css/fitness/js/vendor/bootstrap.min.js" th:src="@{/css/fitness/js/vendor/bootstrap.min.js}"></script>
+<script src="../static/css/fitness/js/vendor/jquery-2.2.4.min.js"
+        th:src="@{/css/fitness/js/vendor/jquery-2.2.4.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="../static/css/fitness/js/vendor/bootstrap.min.js"
+        th:src="@{/css/fitness/js/vendor/bootstrap.min.js}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
 <script src="../static/css/fitness/js/easing.min.js" th:src="@{/css/fitness/js/easing.min.js}"></script>
 <script src="../static/css/fitness/js/hoverIntent.js" th:src="@{/css/fitness/js/hoverIntent.js}"></script>
 <script src="../static/css/fitness/js/superfish.min.js" th:src="@{/css/fitness/js/superfish.min.js}"></script>
-<script src="../static/css/fitness/js/jquery.ajaxchimp.min.js" th:src="@{/css/fitness/js/jquery.ajaxchimp.min.js}"></script>
-<script src="../static/css/fitness/js/jquery.magnific-popup.min.js" th:src="@{/css/fitness/js/jquery.magnific-popup.min.js}"></script>
+<script src="../static/css/fitness/js/jquery.ajaxchimp.min.js"
+        th:src="@{/css/fitness/js/jquery.ajaxchimp.min.js}"></script>
+<script src="../static/css/fitness/js/jquery.magnific-popup.min.js"
+        th:src="@{/css/fitness/js/jquery.magnific-popup.min.js}"></script>
 <script src="../static/css/fitness/js/jquery-ui.js" th:src="@{/css/fitness/js/jquery-ui.js}"></script>
-<script src="../static/css/fitness/js/jquery.nice-select.min.js" th:src="@{/css/fitness/js/jquery.nice-select.min.js}"></script>
+<script src="../static/css/fitness/js/jquery.nice-select.min.js"
+        th:src="@{/css/fitness/js/jquery.nice-select.min.js}"></script>
 <script src="../static/css/fitness/js/owl.carousel.min.js" th:src="@{/css/fitness/js/owl.carousel.min.js}"></script>
 <script src="../static/css/fitness/js/mail-script.js" th:src="@{/css/fitness/js/mail-script.js}"></script>
 <script src="../static/css/fitness/js/main.js" th:src="@{/css/fitness/js/main.js}"></script>

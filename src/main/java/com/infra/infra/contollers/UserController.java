@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 public class UserController {
 
     private UserService userService;
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -24,14 +25,15 @@ public class UserController {
     //Methodes Tester
     //TODO : metre email en rouge et ne pas suprimer les autres champs du formulaire+ affichage que mail existe deja
     @GetMapping("/join")
-    public String requestFirstInscription(Model model){return "join";}
+    public String requestFirstInscription(Model model) {
+        return "join";
+    }
 
 
     @GetMapping("/profile")
-    public String showProfile (Model model)
-    {
+    public String showProfile(Model model) {
         User user = userService.getConnectedUser();
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "edit-profile";
     }
 
@@ -42,13 +44,11 @@ public class UserController {
                               @RequestParam("gender") String gender,
                               @RequestParam("password") String password,
                               @RequestParam("birth_date") Date birthDate,
-                              Model model)
-    {
+                              Model model) {
         User user = userService.getConnectedUser();
-        if (userService.checkEmail(email))
-        {
-            model.addAttribute("title","erreur");
-            model.addAttribute("message","Un utilisateur avec cette adresse mail existe deja");
+        if (userService.checkEmail(email)) {
+            model.addAttribute("title", "erreur");
+            model.addAttribute("message", "Un utilisateur avec cette adresse mail existe deja");
             return "message";
         }
         user.setEmail(email);
@@ -57,48 +57,43 @@ public class UserController {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setBirthDate(birthDate);
-        int gen = (gender.equals("male"))? 1 : 0;
+        int gen = (gender.equals("male")) ? 1 : 0;
         user.setGender(gen);
         userService.update(user);
-        model.addAttribute("title","Profile");
-        model.addAttribute("message","Les modification ont été effectuées !");
+        model.addAttribute("title", "Profile");
+        model.addAttribute("message", "Les modification ont été effectuées !");
         return "message";
     }
 
     @PostMapping("/join")
-    public  String postFirstInscription(
+    public String postFirstInscription(
             @RequestParam("email") String email,
-            @RequestParam("lname") String lname,
-            @RequestParam("fname") String fname,
-            @RequestParam("Sex") String sex,
-            @RequestParam("psw") String psw,
+            @RequestParam("lastname") String lastname,
+            @RequestParam("firstname") String firstname,
+            @RequestParam("gender") String gender,
+            @RequestParam("password") String password,
             @RequestParam("date") Date date,
-            Model model){
+            Model model) {
 
-
-
-        if (userService.checkEmail(email)){//ce mail est déja USED
-            model.addAttribute("checkMail", "The user "+email+" already exists !!");
+        if (userService.checkEmail(email)) {//ce mail est déja USED
+            model.addAttribute("checkMail", "The user " + email + " already exists !!");
             return "join";
-        }else {
-            User personForm =new User();
-            personForm.setLastName(lname);
-            personForm.setFirstName(fname);
+        } else {
+            User personForm = new User();
+            personForm.setLastName(lastname);
+            personForm.setFirstName(firstname);
             personForm.setBirthDate(date);
-            personForm.setGender(Integer.parseInt(sex));
-            personForm.setPassword(psw);
+            personForm.setGender(Integer.parseInt(gender));
+            personForm.setPassword(password);
             personForm.setEmail(email);
             userService.create(personForm);
 
             return "login";
-
         }
-
     }
 
     @RequestMapping("/perform_logout")
-    public String performLogout()
-    {
+    public String performLogout() {
         return "home";
     }
 }
