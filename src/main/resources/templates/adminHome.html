@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div th:if="${not #lists.isEmpty(groupes)}">
-
-        <details th:each="groupe: ${groupes}">
-            <summary th:text="${groupe.groupName}"></summary>
-            <div th:each="activity: ${groupe.getActivities()}">
-                <p th:text="${activity.getActivityName() }"></p>
-                <a href="TODO"><button  type="button">Suprimer activité </button> </a>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div th:if="${not #lists.isEmpty(groupes)}">
+            <details th:each="groupe: ${groupes}">
+                <summary th:text="${groupe.groupName}"></summary>
+                <div th:each="activity: ${groupe.getActivities()}">
+                    <p th:text="${activity.getActivityName() }"></p>
+                    <form th:action="@{'/admin-home/'+${activity.getId()}+'/delete-activity'}" method="post">
+                        <button type="submit">Supprimer cette activité</button>
+                    </form>
+                </div>
+                <a th:href="@{/admin-home/{id}(id = ${groupe.getId()})}">
+                    <button type="button">Add activité</button>
+                </a>
+                <form th:action="@{'/admin-home/'+${groupe.getId()}+'/delete-groupe'}" method="post">
+                    <button type="submit">Supprimer ce groupe</button>
+                </form>
+            </details>
+            <div>
+                <a th:href="@{/admin-home/{id}(id =-1)}">
+                    <button type="button">Add Groupe</button>
+                </a>
             </div>
-            <a th:href="@{/admin-home/{id}(id = ${groupe.getId()})}"><button  type="button">Add activité </button></a>
-
-        </details>
-        <div>
-            <a th:href="@{/admin-home/{id}(id =-1)}"><button  type="button">Add Groupe </button></a>
         </div>
-
-</div>
-</body>
+    </body>
 </html>
