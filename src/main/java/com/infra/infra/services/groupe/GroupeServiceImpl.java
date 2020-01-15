@@ -1,6 +1,9 @@
 package com.infra.infra.services.groupe;
 
+import com.infra.infra.models.Activity;
 import com.infra.infra.models.Groupe;
+import com.infra.infra.models.Session;
+import com.infra.infra.services.activity.ActivityService;
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +14,16 @@ import java.util.List;
 public class GroupeServiceImpl implements GroupeService {
 
     private GroupeRepository groupeRepository;
+    private ActivityService activityService;
 
     @Autowired
     public void setGroupeRepository(GroupeRepository groupeRepository) {
         this.groupeRepository = groupeRepository;
+    }
+
+    @Autowired
+    public void setActivityService(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
 
@@ -43,6 +52,11 @@ public class GroupeServiceImpl implements GroupeService {
 
     @Override
     public void delete(Groupe groupe) {
-        groupeRepository.delete(groupe);
+
+        for (Activity activity:groupe.getActivities())
+        {
+            activityService.delete(activity);
+        }
+        groupeRepository.deleteById(groupe.getId());
     }
 }
