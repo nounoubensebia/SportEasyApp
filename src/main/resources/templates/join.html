@@ -43,17 +43,19 @@
     <link rel="stylesheet" href="../static/css/fitness/css/main.css" th:href="@{/css/fitness/css/main.css}">
 </head>
 <body>
-  <div th:replace="fragments/header-not-connected :: header"></div>
+<div th:replace="fragments/header-not-connected :: header"></div>
 
 <form method="post" action="/join" style="margin:auto;   margin-bottom: 5%; width: 50%;">
 
     <h1> Inscription</h1>
-    <p class="text-danger" th:if="${error == true}">Un utilisateur avec cette addresse mail existe déjà veuillez réessayer</p>
+    <p class="text-danger" th:if="${error == true}">Un utilisateur avec cette addresse mail existe déjà veuillez
+        réessayer</p>
     <label for="lastname"><b>Nom</b></label>
-    <input type="text" placeholder="Entrez votre nom" id="lastname" name="lastname" required>
+    <input type="text" placeholder="Entrez votre nom" id="lastname" name="lastname" required onblur="testLastName()">
 
     <label for="firstname"><b>Prénom</b></label>
-    <input type="text" placeholder="Entrez votre prénom" id="firstname" name="firstname" required>
+    <input type="text" placeholder="Entrez votre prénom" id="firstname" name="firstname" required
+           onblur="testFirstName()">
 
     <label for="gender"><b>Sexe</b></label>
     <select name="gender" id="gender">
@@ -71,8 +73,7 @@
     </div>-->
 
     <label for="email"><b>Adresse mail</b></label>
-    <input type="email" placeholder="Adresse mail" id="email" name="email" required>
-
+    <input type="email" placeholder="Adresse mail" id="email" name="email" required onblur="testEmail()">
 
     <label for="password"><b>Mot de passe</b></label><br/>
     <input type="password" placeholder="Mot de passe" id="password" name="password" minlength="5" required>
@@ -85,7 +86,6 @@
     <button type="reset" style="margin-top: 2%;" class="btn-danger">Vider</button>
     <a href="/login">Vous avez déjà un compte ? connectez vous</a>
 </form>
-
 
 <script src="../static/css/fitness/js/vendor/jquery-2.2.4.min.js"
         th:src="@{/css/fitness/js/vendor/jquery-2.2.4.min.js}"></script>
@@ -108,5 +108,27 @@
 <script src="../static/css/fitness/js/owl.carousel.min.js" th:src="@{/css/fitness/js/owl.carousel.min.js}"></script>
 <script src="../static/css/fitness/js/mail-script.js" th:src="@{/css/fitness/js/mail-script.js}"></script>
 <script src="../static/css/fitness/js/main.js" th:src="@{/css/fitness/js/main.js}"></script>
+<script>
+    function testEmail() {
+        if (!(/^[^\W][a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/.test(document.getElementById("email").value))) {
+            console.log("false");
+            alert("L'email doit être au format example@example.com");
+        }
+    }
+
+    function testLastName() {
+        if (!(/^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/.test(document.getElementById("lastname").value))) {
+            console.log("false");
+            alert("Le nom ne doit comporter que des lettre de l'alphabet");
+        }
+    }
+
+    function testFirstName() {
+        if (!(/^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/.test(document.getElementById("firstname").value))) {
+            console.log("false");
+            alert("Le prénom ne doit comporter que des lettre de l'alphabet");
+        }
+    }
+</script>
 </body>
 </html>
