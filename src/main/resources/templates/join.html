@@ -48,6 +48,7 @@
 <form method="post" action="/join" style="margin:auto;   margin-bottom: 5%; width: 50%;">
 
     <h1> Inscription</h1>
+    <p class="text-danger" th:if="${error == true}">Un utilisateur avec cette addresse mail existe déjà veuillez réessayer</p>
     <label for="lastname"><b>Nom</b></label>
     <input type="text" placeholder="Entrez votre nom" id="lastname" name="lastname" required>
 
@@ -82,6 +83,7 @@
 
     <button type="submit">Valider</button>
     <button type="reset" style="margin-top: 2%;" class="btn-danger">Vider</button>
+    <a href="/login">Vous avez déjà un compte ? connectez vous</a>
 </form>
 
 
