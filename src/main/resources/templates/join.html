@@ -80,7 +80,7 @@
 
     <label for="confirm_password"><b>Confirmation du mot de passe</b></label>
     <input type="password" placeholder="Confirmer mot de passe" id="confirm_password" name="confirm_password"
-           minlength="5" required>
+           minlength="5" required onblur="testSamePassword()">
 
     <button type="submit">Valider</button>
     <button type="reset" style="margin-top: 2%;" class="btn-danger">Vider</button>
@@ -111,22 +111,26 @@
 <script>
     function testEmail() {
         if (!(/^[^\W][a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/.test(document.getElementById("email").value))) {
-            console.log("false");
             alert("L'email doit être au format example@example.com");
         }
     }
 
     function testLastName() {
         if (!(/^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/.test(document.getElementById("lastname").value))) {
-            console.log("false");
             alert("Le nom ne doit comporter que des lettre de l'alphabet");
         }
     }
 
     function testFirstName() {
         if (!(/^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/.test(document.getElementById("firstname").value))) {
-            console.log("false");
             alert("Le prénom ne doit comporter que des lettre de l'alphabet");
+        }
+    }
+
+    function testSamePassword() {
+        if (!(document.getElementById("password").value === document.getElementById("confirm_password").value)) {
+            console.log("false");
+            alert("Les mots de passe ne sont pas identiques.");
         }
     }
 </script>
