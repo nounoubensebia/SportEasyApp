@@ -33,6 +33,7 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfile(Model model) {
         User user = userService.getConnectedUser();
+        model.addAttribute("error",false);
         model.addAttribute("user", user);
         return "edit-profile";
     }
@@ -76,7 +77,8 @@ public class UserController {
             Model model) {
 
         if (userService.checkEmail(email)) {//ce mail est déja USED
-            model.addAttribute("checkMail", "The user " + email + " already exists !!");
+            //model.addAttribute("checkMail", "The user " + email + " already exists !!");
+            model.addAttribute("error",true);
             return "join";
         } else {
             User personForm = new User();

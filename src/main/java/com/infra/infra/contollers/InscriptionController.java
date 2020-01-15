@@ -143,7 +143,7 @@ public class InscriptionController {
         model.addAttribute("inscription", inscription);
         return "unregister-to-session";
     }
-    
+
 
     @RequestMapping( value = "/inscriptions/{id}/unregister", method = RequestMethod.POST)
     public String unregisterPost(@PathVariable("id") int id,
