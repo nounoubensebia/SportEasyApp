@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Inscription</title>
+
     <link rel="stylesheet" type="text/css" th:href="@{/css/style-login-inscription.css}"/>
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,10 +43,11 @@
     <link rel="stylesheet" href="../static/css/fitness/css/main.css" th:href="@{/css/fitness/css/main.css}">
 </head>
 <body>
-<form method="post" action="/join" style="margin:auto; margin-top: 10em; margin-bottom: 5%; width: 50%;">
+  <div th:replace="fragments/header-not-connected :: header"></div>
+
+<form method="post" action="/join" style="margin:auto;   margin-bottom: 5%; width: 50%;">
 
     <h1> Inscription</h1>
-    <span th:if="${error == true}" class="text-danger">Un compte avec cet email existe déjà<br></span>
     <label for="lastname"><b>Nom</b></label>
     <input type="text" placeholder="Entrez votre nom" id="lastname" name="lastname" required>
 
@@ -78,8 +81,7 @@
            minlength="5" required>
 
     <button type="submit">Valider</button>
-    <button type="reset" style="margin-top: 2%;">Vider</button>
-
+    <button type="reset" style="margin-top: 2%;" class="btn-danger">Vider</button>
 </form>
 
 

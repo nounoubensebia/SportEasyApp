@@ -4,35 +4,6 @@
     <meta charset="UTF-8">
     <title>Mon Planning</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css"/>
-
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="../static/css/fitness/img/fav.png" th:href="@{/css/fitness/img/fav.png}">
-    <!-- Author Meta -->
-    <meta name="author" content="colorlib">
-    <!-- Meta Description -->
-    <meta name="description" content="">
-    <!-- Meta Keyword -->
-    <meta name="keywords" content="">
-    <!-- meta character set -->
-    <meta charset="UTF-8">
-    <!-- Site Title -->
-    <title>Fitness</title>
-
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-    <!--
-    CSS
-    ============================================= -->
-    <link rel="stylesheet" href="../static/css/fitness/css/linearicons.css" th:href="@{/css/fitness/css/linearicons.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/font-awesome.min.css" th:href="@{/css/fitness/css/font-awesome.min.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/bootstrap.css" th:href="@{/css/fitness/css/bootstrap.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/magnific-popup.css" th:href="@{/css/fitness/css/magnific-popup.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/nice-select.css" th:href="@{/css/fitness/css/unregister-to-session.html}">
-    <link rel="stylesheet" href="../static/css/fitness/css/animate.min.css" th:href="@{/css/fitness/css/animate.min.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/owl.carousel.css" th:href="@{/css/fitness/css/owl.carousel.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/jquery-ui.css" th:href="@{/css/fitness/css/jquery-ui.css}">
-    <link rel="stylesheet" href="../static/css/fitness/css/main.css" th:href="@{/css/fitness/css/main.css}">
 </head>
 <body>
 
@@ -42,7 +13,7 @@
         <div class="container" style="margin-top: 1em; margin-left: 0em" th:if="${not #lists.isEmpty(titularInscriptions)}" >
             <h3>Mes inscriptions en titulaire</h3>
             <div class="row" style="margin-top: 1em">
-                <div class="col-3" th:each="inscription :${titularInscriptions}">
+                <div class="col-sm-12 col-md-6 col-lg-3" th:each="inscription :${titularInscriptions}">
                     <div class="card" style="align-content: center;">
                         <div class="card-header">
                             <h5 class="text-center" th:text="${inscription.getSession().getActivity().getActivityName()}">
@@ -68,7 +39,7 @@
         <div class="container" style="margin-top: 1em; margin-left: 0em;" th:if="${not #lists.isEmpty(optionalInscriptions)}" >
             <h3>Mes inscriptions en optionnel</h3>
             <div class="row" style="margin-top: 1em; ">
-                <div class="col-3" th:each="inscription :${optionalInscriptions}">
+                <div class="col-sm-12 col-md-6 col-lg-3" th:each="inscription :${optionalInscriptions}">
                     <div class="card" style="align-content: center;">
                         <div class="card-header">
                             <h5 class="text-center" th:text="${inscription.getSession().getActivity().getActivityName()}">
