@@ -2,6 +2,7 @@ package com.infra.infra.models;
 
 import com.infra.infra.Utils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.Predicate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -91,9 +92,35 @@ public class Session {
         this.activity = activity;
     }
 
+    private int getActiveInscriptionsCount()
+    {
+        ArrayList<Inscription> activeInscriptions = new ArrayList<>(inscriptions);
+        CollectionUtils.filter(activeInscriptions, new Predicate<Inscription>() {
+            @Override
+            public boolean evaluate(Inscription inscription) {
+                return inscription.isActive();
+            }
+        });
+        return activeInscriptions.size();
+    }
+
+    private int getAllTitularInscriptionsCount()
+    {
+        ArrayList<Inscription> activeInscriptions = new ArrayList<>(inscriptions);
+        CollectionUtils.filter(activeInscriptions, new Predicate<Inscription>() {
+            @Override
+            public boolean evaluate(Inscription inscription) {
+                return inscription.isTitular();
+            }
+        });
+        return activeInscriptions.size();
+    }
+
     public boolean atFullCapacity(boolean titular) {
-        if (inscriptions.size() < capacity)
+        if ((titular&&getAllTitularInscriptionsCount()<capacity) ||(!titular && getActiveInscriptionsCount() < capacity))
+        {
             return false;
+        }
         else {
             if (titular) {
                 for (Inscription inscription : getInscriptions()) {
