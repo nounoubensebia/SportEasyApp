@@ -10,11 +10,11 @@
 <div th:replace="fragments/header :: header">
 </div>
 
-<form action="/edit-profile" method="post" style="margin:auto; margin-top: 7em; margin-bottom: 5%; width: 50%;">
-    <div class="container">
-            <div class="row justify-content-sm-center">
+<form action="/edit-profile" method="post"  style="margin:auto; margin-top: 7em; margin-bottom: 5%;">
+    <div class="container col-md-10">
+            <div class="col-md-12 col-sm-12 col-lg-12">
 
-                <div class="card" style="width: 70%; margin-top: 2em">
+                <div class="card col-md-12" >
                     <div class="card-header">
                         <div class="container">
                                 <h4 class="card-title">Editer mes informations</h4>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="card-footer">
                         <input type="submit" class="btn btn-primary align-self-end" style="margin-right: 0.5em">
-                        <input type="reset" class="btn btn-secondary" id="reset">
+                        <input type="reset" class="btn btn-danger" id="reset">
                     </div>
                 </div>
             </div>
