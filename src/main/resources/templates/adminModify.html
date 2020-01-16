@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify a group</title>
+</head>
+<body>
+        <summary th:text="${groupe.groupName}"></summary>
+        <form th:action="@{'/admin-home/'+${groupe.getId()}+'/modifier'}"  method="post">
+
+            <label for="nameGroupe"><b>Nom du Groupe</b></label>
+            <input  type="text" th:value="${groupe.getGroupName()}" id="nameGroupe"  name="nameGroupe" required >
+            <div th:each="activity: ${groupe.getActivities()}">
+                <label th:for="activity+${activity.getId()}"><b>Nom de l'Activité</b></label>
+                <input type="text" th:value="${activity.getActivityName()}" th:id="activity+${activity.getId()}"
+                       th:name="activity+${activity.getId()}" required>
+            </div>
+
+
+            </select>
+
+            <button type="submit" >Valider</button>
+        </form>
+
+
+
+
+</body>
+</html>

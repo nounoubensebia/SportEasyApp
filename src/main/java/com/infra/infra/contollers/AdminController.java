@@ -9,10 +9,13 @@ import com.infra.infra.services.session.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class AdminController {
@@ -70,7 +73,9 @@ public class AdminController {
         System.out.println(activity.getId() + "*************************");
         System.out.println(activity.getGroupe().getGroupName() + "*************************");
         activityService.create(activity);
-        return "adminHome";
+        model.addAttribute("title", "Groupe:  "+groupeId);
+        model.addAttribute("message", "Vous avez ajouté une activité.");
+        return "message";
     }
 
     @RequestMapping(value = "/admin-home/{id}/delete-groupe", method = RequestMethod.POST)
@@ -100,4 +105,44 @@ public class AdminController {
         model.addAttribute("message", "Vous avez supprimé cette activité.");
         return "message";
     }
+
+    @GetMapping("/admin-prepamodifier/{id}")
+    public String prepaModifGroupe(@PathVariable String id, Model model) {
+        System.out.println("******************"+id);
+        Groupe groupe;
+        groupe = groupeService.getById(Integer.parseInt(id));
+
+        model.addAttribute("groupe", groupe);
+
+        return "adminModify";
+    }
+    @PostMapping("/admin-home/{id}/modifier")
+    public String modifGroupe(@PathVariable String id,
+                              @RequestBody MultiValueMap<String, String> formData,Model model) {
+
+        Groupe groupe;
+        Set<String> fr=formData.keySet();
+
+        for (String tmp :fr) {
+           if (tmp.contains("activity")){
+               String ko=tmp.substring(8);
+               long idA = Long.valueOf(ko);
+               String actName= String.valueOf(formData.get(tmp));
+               actName=actName.substring(1,actName.length()-1);
+               Activity activity= activityService.getById(idA);
+               activity.setActivityName(actName);
+               activityService.update(activity);
+           }
+        }
+
+        long idG = Long.parseLong(id);
+        groupe=groupeService.getById(idG);
+        groupe.setGroupName(formData.getFirst("nameGroupe"));
+        groupeService.update(groupe);
+        model.addAttribute("title", "Modification du groupe");
+        model.addAttribute("message", "Vous avez Modifier  ce Groupe.");
+        return "message";
+
+    }
+
 }

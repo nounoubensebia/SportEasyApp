@@ -20,6 +20,10 @@
                 <form th:action="@{'/admin-home/'+${groupe.getId()}+'/delete-groupe'}" method="post">
                     <button type="submit">Supprimer ce groupe</button>
                 </form>
+                <a th:href="@{/admin-prepamodifier/{id} (id = ${groupe.getId()})}">
+                    <button type="button">Modifier  ce groupe</button>
+                </a>
+
             </details>
             <div>
                 <a th:href="@{/admin-home/{id}(id =-1)}">
