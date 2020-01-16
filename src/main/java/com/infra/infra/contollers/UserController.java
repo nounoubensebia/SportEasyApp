@@ -33,7 +33,7 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfile(Model model) {
         User user = userService.getConnectedUser();
-        model.addAttribute("error",false);
+        model.addAttribute("error", false);
         model.addAttribute("user", user);
         return "edit-profile";
     }
@@ -74,11 +74,28 @@ public class UserController {
             @RequestParam("gender") String gender,
             @RequestParam("password") String password,
             @RequestParam("date") Date date,
+            @RequestParam("checkLastname") Boolean checkLastname,
+            @RequestParam("checkFirstname") Boolean checkFirstname,
+            @RequestParam("checkEmail") Boolean checkEmail,
+            @RequestParam("checkPassword") Boolean checkPassword,
             Model model) {
 
+        if (checkLastname == false) {
+            model.addAttribute("errorLastname", true);
+            return "join";
+        } else if (checkFirstname == false) {
+            model.addAttribute("errorFirstname", true);
+            return "join";
+        } else if (checkEmail == false) {
+            model.addAttribute("errorEmail", true);
+            return "join";
+        } else if (checkPassword == false) {
+            model.addAttribute("errorPassword", true);
+            return "join";
+        }
         if (userService.checkEmail(email)) {//ce mail est déja USED
             //model.addAttribute("checkMail", "The user " + email + " already exists !!");
-            model.addAttribute("error",true);
+            model.addAttribute("error", true);
             return "join";
         } else {
             User personForm = new User();
