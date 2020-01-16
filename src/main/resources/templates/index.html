@@ -15,7 +15,7 @@
     <!-- meta character set -->
     <meta charset="UTF-8">
     <!-- Site Title -->
-    <title>Fitness</title>
+    <title>SportEasy</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <!--
@@ -72,13 +72,24 @@
                 <div th:each="groupe: ${groupes}" th:remove="tag">
                     <div class="single-carusel item" th:each="activity: ${groupe.getActivities()}" >
                         <div class="thumb" th:href="'/activities/'+${activity.getId()}">
-                            <img class="img-fluid" src="../static/css/fitness/img/c1.jpg" th:src="@{/css/fitness/img/c1.jpg}" alt="">
+                            <!--<img class="img-fluid" src="../static/css/fitness/img/c1.jpg" th:src="@{/css/fitness/img/c1.jpg}" alt="">-->
+                            <div class="card">
+                                <a th:href="'/activities/'+${activity.getId()}" class="card-title"
+                                     th:text="${activity.getActivityName()}"
+                                     style="margin-left: 24px; margin-top: 8px; color: #000000">
+                                    CravMaga
+                                </a>
+                                <p th:text="${activity.groupe.groupName}" style="margin-left: 24px; margin-top: 8px; color: #000000">
+                                    Groupe 1
+                                </p>
+                                <div class="card-body">
+                                    <div class="card-text">Test</div>
+                                </div>
+                            </div>
                             <div class="join-btn"><a th:href="'activities/'+${activity.getId()}">S'inscrire</a></div>
                         </div>
                         <div class="title-price d-flex justify-content-between">
-                            <a th:href="'/activities/'+${activity.getId()}">
-                                <h4 th:text="${activity.getActivityName()}+' ('+${activity.groupe.groupName}+')'"></h4>
-                            </a>
+
                         </div>
                     </div>
                 </div>
