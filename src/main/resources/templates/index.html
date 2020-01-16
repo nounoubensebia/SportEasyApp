@@ -77,7 +77,7 @@
                         </div>
                         <div class="title-price d-flex justify-content-between">
                             <a th:href="'/activities/'+${activity.getId()}">
-                                <h4 th:text="${activity.getActivityName()}"></h4>
+                                <h4 th:text="${activity.getActivityName()}+' ('+${activity.groupe.groupName}+')'"></h4>
                             </a>
                         </div>
                     </div>
