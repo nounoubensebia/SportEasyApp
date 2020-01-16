@@ -34,6 +34,11 @@ public class IndexController {
 
         boolean isUserConnected = userService.isUserConnected();
 
+        if (isUserConnected && userService.getConnectedUser().isAdmin())
+        {
+            return "redirect:admin-home";
+        }
+
         List<Groupe> groupes = groupeService.getAll();
 
         //Il faut ajouter les données à afficher à l'HTML
