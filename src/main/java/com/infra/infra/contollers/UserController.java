@@ -1,6 +1,7 @@
 package com.infra.infra.contollers;
 
 import com.infra.infra.BCryptManagerUtil;
+import com.infra.infra.Utils;
 import com.infra.infra.models.User;
 import com.infra.infra.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,22 +75,26 @@ public class UserController {
             @RequestParam("gender") String gender,
             @RequestParam("password") String password,
             @RequestParam("date") Date date,
-            @RequestParam("checkLastname") Boolean checkLastname,
-            @RequestParam("checkFirstname") Boolean checkFirstname,
-            @RequestParam("checkEmail") Boolean checkEmail,
-            @RequestParam("checkPassword") Boolean checkPassword,
             Model model) {
 
-        if (checkLastname == false) {
+        boolean checkLastname = true;
+        boolean checkFirstname = true;
+        boolean checkEmail = true;
+        boolean checkPassword = true;
+        checkFirstname = Utils.checkName(lastname);
+        checkLastname = Utils.checkName(firstname);
+        checkEmail = Utils.checkEmail(email);
+        checkPassword = password.length()>2;
+        if (!checkLastname) {
             model.addAttribute("errorLastname", true);
             return "join";
-        } else if (checkFirstname == false) {
+        } else if (!checkFirstname) {
             model.addAttribute("errorFirstname", true);
             return "join";
-        } else if (checkEmail == false) {
+        } else if (!checkEmail) {
             model.addAttribute("errorEmail", true);
             return "join";
-        } else if (checkPassword == false) {
+        } else if (!checkPassword) {
             model.addAttribute("errorPassword", true);
             return "join";
         }
