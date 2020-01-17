@@ -6,75 +6,90 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!-- CSS ============================================= -->
+    <link rel="stylesheet" href="../static/css/fitness/css/linearicons.css"
+          th:href="@{/css/fitness/css/linearicons.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/font-awesome.min.css"
+          th:href="@{/css/fitness/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/bootstrap.css" th:href="@{/css/fitness/css/bootstrap.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/magnific-popup.css"
+          th:href="@{/css/fitness/css/magnific-popup.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/nice-select.css"
+          th:href="@{/css/fitness/css/unregister-to-session.html}">
+    <link rel="stylesheet" href="../static/css/fitness/css/animate.min.css"
+          th:href="@{/css/fitness/css/animate.min.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/owl.carousel.css"
+          th:href="@{/css/fitness/css/owl.carousel.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/jquery-ui.css" th:href="@{/css/fitness/css/jquery-ui.css}">
+    <link rel="stylesheet" href="../static/css/fitness/css/main.css" th:href="@{/css/fitness/css/main.css}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
+    <div th:replace="fragments/admin :: header"></div>
     <div class="panel-group" id="accordion">
-
-            <div th:if="${not #lists.isEmpty(groupes)}">
+        <div th:if="${not #lists.isEmpty(groupes)}">
             <div th:each="groupe: ${groupes}" class="panel panel-default">
-
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" th:href="@{#} + ${groupe.id}" th:text="${groupe.groupName}"> </a>
+                        <a data-toggle="collapse" data-parent="#accordion" th:href="@{#} + ${groupe.id}"
+                           th:text="${groupe.groupName}"> </a>
                     </h4>
                 </div>
                 <div th:id="${groupe.id}" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div th:each="activity: ${groupe.getActivities()}">
-
                             <form th:action="@{'/admin-home/'+${activity.getId()}+'/delete-activity'}" method="post">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label th:text="${activity.getActivityName() }"></label>
                                     </div>
-                                    <div class="col-md-3"><button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer une activité"><span class="glyphicon glyphicon-trash"></span></button>
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-danger" data-toggle="tooltip"
+                                                data-placement="top" title="Supprimer une activité"><span
+                                                class="glyphicon glyphicon-trash"></span></button>
                                     </div>
-
-                                </div><br>
-
+                                </div>
+                                <br>
                             </form>
-
-                        </div><br><br>
+                        </div>
+                        <br><br>
                         <form th:action="@{'/admin-home/'+${groupe.getId()}+'/delete-groupe'}" method="post">
                             <div class="row">
                                 <div class="col-md-2">
-
-                          <a th:href="@{/admin-home/{id}(id = ${groupe.getId()})}">
-                              <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Ajouter une activité"><span class="glyphicon glyphicon-plus"></span></button>
-                        </a>
+                                    <a th:href="@{/admin-home/{id}(id = ${groupe.getId()})}">
+                                        <button type="button" class="btn btn-primary" data-toggle="tooltip"
+                                                data-placement="top" title="Ajouter une activité"><span
+                                                class="glyphicon glyphicon-plus"></span></button>
+                                    </a>
                                 </div>
-                                    <div class="col-md-1">
-                            <button type="submit" class="btn btn-danger"data-toggle="tooltip" data-placement="top" title="Supprimer groupe"><span class="glyphicon glyphicon-trash"></span></button>
-                                    </div>
-                                        <div class="col-md-2">
-                        <a th:href="@{/admin-prepamodifier/{id} (id = ${groupe.getId()})}">
-                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Modifier groupe"><span class="glyphicon glyphicon-edit"></span></button>
-                        </a>
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip"
+                                            data-placement="top" title="Supprimer groupe"><span
+                                            class="glyphicon glyphicon-trash"></span></button>
                                 </div>
-
-
-                    </div>
+                                <div class="col-md-2">
+                                    <a th:href="@{/admin-prepamodifier/{id} (id = ${groupe.getId()})}">
+                                        <button type="button" class="btn btn-success" data-toggle="tooltip"
+                                                data-placement="top" title="Modifier groupe"><span
+                                                class="glyphicon glyphicon-edit"></span></button>
+                                    </a>
+                                </div>
+                            </div>
                         </form>
+                    </div>
                 </div>
-
-
-
-
-
-            </div>
             </div>
         </div>
-            <div>
-                <a th:href="@{/admin-home/{id}(id =-1)}">
-                    <button type="button" class="btn btn-primary">Add Groupe</button>
-                </a>
-            </div>
-
-
+        <div>
+            <a th:href="@{/admin-home/{id}(id =-1)}">
+                <button type="button" class="btn btn-primary">Add Groupe</button>
+            </a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
