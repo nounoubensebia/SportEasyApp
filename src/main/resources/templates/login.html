@@ -38,8 +38,8 @@
 <div th:replace="fragments/header-not-connected :: header"></div>
     <form th:action="@{/login}" method="post" style="margin:auto; margin-top: 10em; margin-bottom: 5%; width: 50%;"> <!--action="/action_page.php"-->
         <div>
-            <label for="username"><b>Nom d'utilisateur</b></label>
-            <input type="text" placeholder="Entrez votre nom d'utilisateur" name="username" id="username" required>
+            <label for="username"><b>Email</b></label>
+            <input type="text" placeholder="mail@exemple.com" name="username" id="username" required>
             <label for="password"><b>Mot de passe</b></label>
             <input type="password" placeholder="Entrez votre mot de passe" name="password" id="password" required>
             <button onclick="">Login</button>

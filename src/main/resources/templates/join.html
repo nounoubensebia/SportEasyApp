@@ -102,6 +102,7 @@
     var form = document.getElementById("submit-form");
     submit.addEventListener("click", submit_clicked);
     function submit_clicked() {
+
         var form = document.getElementById("submit-form");
         var check = true;
         if (!(/^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/.test(document.getElementById("lastname").value))) {
@@ -113,10 +114,15 @@
         } else if (!(/^[^\W][a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/.test(document.getElementById("email").value))) {
             alert("L'email doit être au format example@example.com");
             //document.getElementById("checkEmail").value = false;
+        }else if (document.getElementById("date").value===document.getElementById("date").defaultValue){
+            alert("Veuillez entrer votre date de naissance");
+        }else if ((document.getElementById("password").value ==="") || document.getElementById("confirm_password").value===""){
+            alert("Veuillez remplir le mot de passe et la confirmation");
         } else if (!(document.getElementById("password").value === document.getElementById("confirm_password").value)) {
             alert("Les mots de passe ne sont pas identiques.");
-        } else
-        {
+        } else if(document.getElementById("password").value.length < 5){
+            alert("Le mots de passe devrait contenir au moin 5 caracteres");
+        }else {
             form.submit();
         }
     }
