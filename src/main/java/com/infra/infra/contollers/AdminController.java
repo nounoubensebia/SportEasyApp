@@ -75,7 +75,7 @@ public class AdminController {
         activityService.create(activity);
         model.addAttribute("title", "Groupe:  "+groupeId);
         model.addAttribute("message", "Vous avez ajouté une activité.");
-        return "message";
+        return "admin-message";
     }
 
     @RequestMapping(value = "/admin-home/{id}/delete-groupe", method = RequestMethod.POST)
@@ -84,12 +84,12 @@ public class AdminController {
         if (groupe == null) {
             model.addAttribute("title", "erreur");
             model.addAttribute("message", "Une erreur s'est produite");
-            return "message";
+            return "admin-message";
         }
         groupeService.delete(groupe);
         model.addAttribute("title", "Suppression d'un groupe");
         model.addAttribute("message", "Vous avez supprimé ce groupe.");
-        return "message";
+        return "admin-message";
     }
 
     @RequestMapping(value = "/admin-home/{id}/delete-activity", method = RequestMethod.POST)
@@ -98,12 +98,12 @@ public class AdminController {
         if (activity == null) {
             model.addAttribute("title", "erreur");
             model.addAttribute("message", "Une erreur s'est produite");
-            return "message";
+            return "admin-message";
         }
         activityService.delete(activity);
         model.addAttribute("title", "Suppression d'une activité");
         model.addAttribute("message", "Vous avez supprimé cette activité.");
-        return "message";
+        return "admin-message";
     }
 
     @GetMapping("/admin-prepamodifier/{id}")
@@ -141,7 +141,7 @@ public class AdminController {
         groupeService.update(groupe);
         model.addAttribute("title", "Modification du groupe");
         model.addAttribute("message", "Vous avez Modifier  ce Groupe.");
-        return "message";
+        return "admin-message";
 
     }
 
