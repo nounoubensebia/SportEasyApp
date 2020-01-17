@@ -35,17 +35,19 @@ INSERT INTO session VALUES (NULL,30,'Samedi','10:00:00',9);
 INSERT INTO session VALUES (NULL,30,'Samedi','14:00:00',10);
 
 -- user
-INSERT INTO user VALUES (NULL,'1990-12-12','toto@toto.com','Toto',1,'Wolf','toto');
-INSERT INTO user VALUES (NULL,'1980-10-12','tata@tata.com','Tata',1,'Wolf','tata');
-INSERT INTO user VALUES (NULL,'1985-09-12','titi@titi.com','Titi',1,'Wolf','titi');
+
+INSERT INTO user VALUES (NULL,'1990-12-12','admin@sporteasy.com','admin',1,1,'admin','$2a$10$rfOhbPdQnlqYxGHwwWUgbOLHk6eyvr8u/uYe4kh72fQlZZ808BE5u');
+INSERT INTO user VALUES (NULL,'1990-12-12','toto@toto.com','Toto',1,0,'Wolf','$2a$10$Tb1tcRAYd9Q7R17tMhkB8eVo6xFm9pdWGPHsuu1k2zwWsNL3iY8Aa');
+INSERT INTO user VALUES (NULL,'1980-10-12','tata@tata.com','Tata',0,0,'Wolf','$2a$10$oKmwnS3B9COqkuT1o.MO4e8g2McWsxOeuAXUZihpmcnrZuFhvqiZG');
+INSERT INTO user VALUES (NULL,'1985-09-12','titi@titi.com','Titi',1,0,'Wolf','$2a$10$NLlSgogNR.mGOIrldLTBc.ETlhg19FGjh5YVOG8FBvzow7VGRVcPC');
 
 -- inscription
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,2,1);
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,3,1);
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,12,1);
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,2,2);
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,3,2);
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,12,2);
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,2,3);
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,3,3);
-INSERT INTO inscription VALUES (NULL,'2019-12-20 10:00:00',1,12,3);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,2,2);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,3,2);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,12,2);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,2,3);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,3,3);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,12,3);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,2,4);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,3,4);
+INSERT INTO inscription VALUES (NULL,NULL,'2019-12-20 10:00:00',1,12,4);
