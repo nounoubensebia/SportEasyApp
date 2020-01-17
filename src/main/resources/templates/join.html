@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="../static/css/fitness/css/jquery-ui.css" th:href="@{/css/fitness/css/jquery-ui.css}">
     <link rel="stylesheet" href="../static/css/fitness/css/main.css" th:href="@{/css/fitness/css/main.css}">
 </head>
-<body>
+<body style="margin-top: 5em;">
 <div th:replace="fragments/header-not-connected :: header"></div>
 
 <form method="post" id="submit-form" action="/join" style="margin:auto;   margin-bottom: 5%; width: 50%;">
@@ -90,31 +90,12 @@
 
     <!--<button type="reset" style="margin-top: 2%;" class="btn-danger">Vider</button>-->
     <a href="/login">Vous avez déjà un compte ? connectez vous</a>
+    <button class="btn-primary" type="submit" id="submit">Valider</button>
 </form>
 
-    <button class="btn-primary" type="submit" id="submit">Valider</button>
 
-<script src="../static/css/fitness/js/vendor/jquery-2.2.4.min.js"
-        th:src="@{/css/fitness/js/vendor/jquery-2.2.4.min.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="../static/css/fitness/js/vendor/bootstrap.min.js"
-        th:src="@{/css/fitness/js/vendor/bootstrap.min.js}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-<script src="../static/css/fitness/js/easing.min.js" th:src="@{/css/fitness/js/easing.min.js}"></script>
-<script src="../static/css/fitness/js/hoverIntent.js" th:src="@{/css/fitness/js/hoverIntent.js}"></script>
-<script src="../static/css/fitness/js/superfish.min.js" th:src="@{/css/fitness/js/superfish.min.js}"></script>
-<script src="../static/css/fitness/js/jquery.ajaxchimp.min.js"
-        th:src="@{/css/fitness/js/jquery.ajaxchimp.min.js}"></script>
-<script src="../static/css/fitness/js/jquery.magnific-popup.min.js"
-        th:src="@{/css/fitness/js/jquery.magnific-popup.min.js}"></script>
-<script src="../static/css/fitness/js/jquery-ui.js" th:src="@{/css/fitness/js/jquery-ui.js}"></script>
-<script src="../static/css/fitness/js/jquery.nice-select.min.js"
-        th:src="@{/css/fitness/js/jquery.nice-select.min.js}"></script>
-<script src="../static/css/fitness/js/owl.carousel.min.js" th:src="@{/css/fitness/js/owl.carousel.min.js}"></script>
-<script src="../static/css/fitness/js/mail-script.js" th:src="@{/css/fitness/js/mail-script.js}"></script>
-<script src="../static/css/fitness/js/main.js" th:src="@{/css/fitness/js/main.js}"></script>
+
+
 <script>
     var submit = document.getElementById("submit");
     var form = document.getElementById("submit-form");
@@ -140,5 +121,20 @@
         }
     }
 </script>
+
+<script src="../static/css/fitness/js/vendor/jquery-2.2.4.min.js" th:src="@{/css/fitness/js/vendor/jquery-2.2.4.min.js}" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="../static/css/fitness/js/vendor/bootstrap.min.js" th:src="@{/css/fitness/js/vendor/bootstrap.min.js}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+<script src="../static/css/fitness/js/easing.min.js" th:src="@{/css/fitness/js/easing.min.js}"></script>
+<script src="../static/css/fitness/js/hoverIntent.js" th:src="@{/css/fitness/js/hoverIntent.js}"></script>
+<script src="../static/css/fitness/js/superfish.min.js" th:src="@{/css/fitness/js/superfish.min.js}"></script>
+<script src="../static/css/fitness/js/jquery.ajaxchimp.min.js" th:src="@{/css/fitness/js/jquery.ajaxchimp.min.js}"></script>
+<script src="../static/css/fitness/js/jquery.magnific-popup.min.js" th:src="@{/css/fitness/js/jquery.magnific-popup.min.js}"></script>
+<script src="../static/css/fitness/js/jquery-ui.js" th:src="@{/css/fitness/js/jquery-ui.js}"></script>
+<script src="../static/css/fitness/js/jquery.nice-select.min.js" th:src="@{/css/fitness/js/jquery.nice-select.min.js}"></script>
+<script src="../static/css/fitness/js/owl.carousel.min.js" th:src="@{/css/fitness/js/owl.carousel.min.js}"></script>
+<script src="../static/css/fitness/js/mail-script.js" th:src="@{/css/fitness/js/mail-script.js}"></script>
+<script src="../static/css/fitness/js/main.js" th:src="@{/css/fitness/js/main.js}"></script>
 </body>
 </html>

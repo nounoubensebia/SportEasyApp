@@ -1,13 +1,14 @@
-<header th:fragment="header" xmlns:th="http://www.thymeleaf.org">
-    <!-- Static navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">SportEasy</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-
+<header th:fragment="header" xmlns:th="http://www.thymeleaf.org" style="position: fixed;">
+    <div id="header">
+        <div class="container main-menu">
+            <div class="row align-items-center justify-content-center">
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active" ><a href="/">Accueil</a></li>
+                        <li><a href="/perform_logout" type="submit">Connexion</a></li>
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+            </div>
         </div>
-
-    </nav>
+    </div><!-- #header -->
 </header>
